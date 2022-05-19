@@ -32,10 +32,46 @@ class Query {
         $q = $con->prepare("insert into $table($fields) values($tmp_placement)");
         $q->bind_param($types, ...$values);
 
-        $q->execute();
+        if(!$q->execute()){
+            exit("error 500");
+        }
     }
 
-    public static function read(){
+    public static function read($fields, $table, $condition = '', $params = []){
+        $con = new Connection();
+        $con = $con->getConnection();
+
+        $fields_text = implode(",", $fields);
+
+        $sql= "SELECT $fields_text FROM $table";
+
+        if($condition != ''){
+            $sql = "SELECT $fields_text FROM $table WHERE $condition";
+        }
+
+        $q = $con->prepare($sql);
+
+        if(!$q->execute($params)){
+            exit("error 500");
+        }
+
+        $resultset = $q->get_result();
+        $results = $resultset->fetch_all();
+
+        $data = [];
+
+        foreach($results as $result){
+            $arr = [];
+
+            $i = 0;
+            foreach($fields as $field){
+                $arr[$field] = $result[$i];
+                $i++;
+            }
+
+            $data[] = $arr;
+        }
+        return $data;
 
     }
 
