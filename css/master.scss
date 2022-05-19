@@ -3,6 +3,7 @@
 $black: #2C3638;
 $red: #CC6467;
 $white: #f0f0f0;
+$gray: #BCC1C2;
 
 *{
     margin:0px;
@@ -118,6 +119,31 @@ nav{
             text-align: right;
             font-size: 29px;
             font-weight: 700;
+            position: relative;
+            width: fit-content;
+            margin-left: auto;
+            &::after{
+                content: '';
+                display: block;
+                width: 60%;
+                height: 5px;
+                background: $black;
+                right:0;
+                bottom: -10px;
+                border-radius: 10px;
+                position: absolute;
+            }
+            &::before{
+                content: '';
+                display: block;
+                width: 5px;
+                height: 5px;
+                background: $black;
+                right:65%;
+                bottom: -10px;
+                border-radius: 10px;
+                position: absolute;
+            }
         }
         .news{
             display: grid;
@@ -191,6 +217,45 @@ nav{
                 }
             }
             
+        }
+        .music{
+            height: 50vh;
+            position: relative;
+            ul{
+                list-style-type: none;
+                padding: 0;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                padding-bottom: 100px;
+                height: 30%;
+                margin-bottom: 20%;
+                overflow: hidden;
+                li{
+                    display: flex;
+                    margin-bottom: 38px;
+                    font-size: 17px;
+                    color: $gray;
+                    .title{
+                        padding-right: 20px;
+                    }
+                    .time{
+                        padding-left: 20px;
+                    }
+                }
+                .music-selected{
+                    color: $black;
+                }
+            }
+            .bar{
+                width: 4px;
+                height: 60%;
+                background-color: $black;
+                display: block;
+                position: absolute;
+                bottom:0;
+                right: calc(5ch + 10px);
+            }
         }
     }
 }
