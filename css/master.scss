@@ -242,12 +242,22 @@ nav{
                     .time{
                         padding-left: 20px;
                     }
+                    &::after{
+                        content: '';
+                        width: 10px;
+                        height: 10px;
+                        background-color: $black;
+                        margin: 0px auto;
+                        position: absolute;
+                        right: calc(5ch + 4px);
+                        border-radius: 100%;
+                    }
                 }
                 .music-selected{
                     color: $black;
                 }
             }
-            .bar{
+            .bar-music{
                 width: 4px;
                 height: 60%;
                 background-color: $black;
@@ -255,6 +265,32 @@ nav{
                 position: absolute;
                 bottom:0;
                 right: calc(5ch + 10px);
+            }
+            .player{
+                position: absolute;
+                bottom:0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .progress-bar{
+                    width: 300px;
+                    height: 6px;
+                    background-color: $gray;
+                    border-radius: 5px;
+                    margin-right: 20px;
+                    .bar{
+                        width: 50%;
+                        height: 100%;
+                        background-color: $black;
+                        border-radius: 5px;
+                    }
+                }
+                .player{
+                    
+                    img{
+                        display: block;
+                    }
+                }
             }
         }
     }
