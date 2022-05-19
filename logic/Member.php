@@ -4,6 +4,7 @@ namespace Members;
 use \Database\Query;
 
 abstract class Member {
+    public int $id=0;
     public string $name;
     public string $age;
     public string $email;
@@ -14,6 +15,8 @@ abstract class Member {
     function __construct(){
         
     }
+
+    public abstract function save() : bool;
 
     public static function params(string $name, int $age, string $email, string $password, string $date_joined = '', string $token = ''){
         $instance = new static();
@@ -44,6 +47,7 @@ abstract class Member {
         $results = \Database\Query::read($fields, "members", "id = ?", [$id]);
 
         foreach($results as $result){
+            $instance->id = $result['id'];
             $instance->name = $result['name'];
             $instance->email = $result['email'];
             $instance->password = $result['password'];

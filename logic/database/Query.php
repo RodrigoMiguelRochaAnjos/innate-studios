@@ -75,8 +75,44 @@ class Query {
 
     }
 
-    public static function update(){
+    public static function update($params, $table, $condition = '', $condition_params = []){
+        $con = new Connection();
+        $con = $con->getConnection();
 
+        $statement = [];
+        $values = [];
+        $types = "";
+
+        foreach($params as $field => $value){
+            $type = gettype($value)[0];
+
+            $statement[] = "$field = ?";
+            $values[] = $value;
+
+            $types .= $type;
+        }
+
+        foreach($condition_params as $param){
+            $type = gettype($param)[0];
+
+            $types .= $type;
+        }
+
+        $values = array_merge($values, $condition_params);
+        $statement = implode(",", $statement);
+
+        $sql= "UPDATE $table SET $statement";
+
+        if($condition != ''){
+            $sql = "UPDATE $table SET $statement WHERE $condition";
+        }
+
+        $q = $con->prepare($sql);
+        $q->bind_param($types, ...$values);
+
+        if(!$q->execute()){
+            exit("error 500");
+        }
     }
 
     public static function delete(){
