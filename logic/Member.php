@@ -16,7 +16,8 @@ abstract class Member {
         
     }
 
-    public abstract function save() : bool;
+    public abstract function save();
+    public abstract function add();
 
     public static function params(string $name, int $age, string $email, string $password, string $date_joined = '', string $token = ''){
         $instance = new static();

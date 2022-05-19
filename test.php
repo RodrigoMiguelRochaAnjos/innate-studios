@@ -7,23 +7,35 @@ require_once 'logic/Member.php';
 require_once 'logic/Artist.php';
 require_once 'logic/Music.php';
 
-$name = "Rodrigo";
-$age = 21;
-$email = "trabalhorodrigoa@gmail.com";
-$password = "123";
-$date_joined = '';
-$token = '';
 
-$member = \Members\Artist::id(3);
+$studio = new Studio();
 
-$id = 0;
-$title = "Music";
-$file = "123";
-$datePublished = date("Y-m-d H:i:s");
+$studio->getMembers();
 
-$music = \Studio\Productions\Music::id(1);
+foreach($studio->members as $member){
+    echo $member->name."<br>";
+}
 
-$music->changeAuthor($member->id);
+
+
+// $name = "Rodrigo";
+// $age = 21;
+// $email = "amaxzjasdfbcn@gmail.com";
+// $password = "123";
+// $date_joined = '';
+// $token = '';
+
+// $member = \Members\Artist::params($name,$age,$email,$password,$date_joined, $token);
+// $member->add();
+
+// $id = 0;
+// $title = "Music";
+// $file = "123";
+// $datePublished = date("Y-m-d H:i:s");
+
+// $music = \Studio\Productions\Music::id(1);
+
+// $music->changeAuthor($member->id);
 
 
 // $params = [

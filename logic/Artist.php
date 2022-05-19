@@ -22,8 +22,31 @@ class Artist extends Member{
 
         $music->add();
     }
+    
+    public function save() {
+        $params = [
+            'name' => $this->name,
+            'age' => $this->age,
+            'email' => $this->email,
+            'password' => $this->password,
+            'date_joined' => $this->date_joined,
+            'token' => $this->token
+        ];
+        
+        \Database\Query::update($params, "members", "id = ?", [$this->id]);
+    }
 
-    public function save(): bool{
-
+    public function add() {
+        $params = [
+            'name' => $this->name,
+            'age' => $this->age,
+            'email' => $this->email,
+            'password' => $this->password,
+            'date_joined' => $this->date_joined,
+            'token' => $this->token,
+            'type' => "Artist"
+        ];
+        
+        \Database\Query::create($params, "members");
     }
 }
