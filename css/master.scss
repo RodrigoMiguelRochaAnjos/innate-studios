@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+$black: #2C3638;
+$red: #CC6467;
+$white: #f0f0f0;
+
+*{
+    margin:0px;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+.c2a{
+    background-color: $red;
+    color: $white;               
+}
+nav{
+    display: flex;
+    padding: 0 7.3%;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top:0;
+    width: 100%;
+    margin-top: 39px;
+    #logo{
+        margin-left: 0;
+        margin-right: auto;
+        height: 69px;
+        img{
+            display: block;
+            height: 100%;
+        }
+    }
+    ul{
+        list-style-type: none;
+        padding:0;
+        display: flex;
+        li a{
+            display: flex;
+            width: 109px;
+            text-decoration: none;
+            color: $black;
+            font-size: 14px;
+            font-weight: 400;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            height: 38px;
+            &.c2a{
+                border-radius: 16px;
+            }
+        }
+    }
+}
+.content{
+    min-height: 100vh;
+    min-width: 100vw;
+    padding: 0px 7.3%;
+    padding-top: 108px;
+    &#content-home{
+        background-image: url('../img/bg.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .row{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: calc(100vh - 108px);
+        section{
+            display: flex;
+            flex-basis: 50%;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            .name {
+                padding-left: 35px;
+                position: relative;
+                transform: translateY(-108px);
+
+                h1{
+                    font-size: 84px;
+                    color: #f0f0f0;
+                    font-family: "Poppins",sans-serif !important;
+                }
+                p{
+                    margin-top: 42px;
+                    font-size: 31px;
+                    color: #f0f0f0;
+                    font-weight: 700;
+                    font-family: "Poppins", sans-serif;
+                    b{
+                        color: $red;
+                        font-family: "Poppins", sans-serif;
+                        
+                    }
+                }
+                &::before{
+                    content: '';
+                    height: 129px;
+                    width: 5px;
+                    background: #CC6467;
+                    display: block;
+                    position: absolute;
+                    left:0;
+                    top:50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+    }
+}
