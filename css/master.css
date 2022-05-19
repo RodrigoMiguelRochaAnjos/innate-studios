@@ -150,6 +150,11 @@ nav ul li a.c2a {
           transform: translateY(-50%);
 }
 
+.content .content-right {
+  margin-right: 0;
+  margin-left: auto;
+}
+
 .content .content-right h1 {
   text-align: right;
   font-size: 29px;
@@ -174,7 +179,7 @@ nav ul li a.c2a {
 .content .content-right .news .post .cover {
   width: 100%;
   height: 100%;
-  background-color: #2c363831;
+  background-color: rgba(0, 0, 0, 0.39);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -185,7 +190,7 @@ nav ul li a.c2a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border-radius: 20px;
+  border-radius: 23px;
 }
 
 .content .content-right .news .post .cover .bottom {
@@ -261,5 +266,6 @@ nav ul li a.c2a {
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2 / span 1;
+  width: 192px;
 }
 /*# sourceMappingURL=master.css.map */
