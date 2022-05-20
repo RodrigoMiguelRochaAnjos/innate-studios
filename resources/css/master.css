@@ -46,6 +46,12 @@ nav ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 nav ul li a {
@@ -69,6 +75,30 @@ nav ul li a {
 
 nav ul li a.c2a {
   border-radius: 16px;
+  width: 150px;
+  height: 40px;
+}
+
+@-webkit-keyframes slide {
+  from {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  to {
+    -webkit-transform: translateX(-80%);
+            transform: translateX(-80%);
+  }
+}
+
+@keyframes slide {
+  from {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  to {
+    -webkit-transform: translateX(-80%);
+            transform: translateX(-80%);
+  }
 }
 
 .content {
@@ -76,12 +106,42 @@ nav ul li a.c2a {
   min-width: 100vw;
   padding: 0px 7.3%;
   padding-top: 108px;
-}
-
-.content#content-home {
-  background-image: url("../img/bg.png");
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+.content .back-text {
+  left: 30%;
+  overflow: hidden;
+  max-width: 70%;
+}
+
+.content .back-text .scroll-text {
+  position: absolute;
+  overflow: hidden;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.content .back-text .scroll-text h1 {
+  font-size: 275px;
+  z-index: -1;
+  white-space: nowrap;
+  font-family: "Poppins";
+  text-transform: uppercase;
+  color: #2C3638;
+  opacity: 0.07;
+  display: inline-block;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-animation: slide 10s linear infinite;
+          animation: slide 10s linear infinite;
 }
 
 .content .row {

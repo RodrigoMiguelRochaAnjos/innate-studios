@@ -2,8 +2,14 @@
 class Router {
     public static array $routes = [];
 
-    public static function get(string $path, callable $callback){
-        self::$routes[$path] = $callback;
+    public static function get(string $path, string $name){
+        $ctrl = ucfirst($name)."Controller";
+
+        self::$routes[$path] = [
+            'controller' => $ctrl,
+            'name' => $name
+        ];
+
     }
     
     public static function run(){
@@ -11,7 +17,7 @@ class Router {
 
         $found = false;
     
-        foreach(self::$routes as $path => $callback){
+        foreach(self::$routes as $path => $page){
             $arguments = explode("/", $uri);
 
             array_splice($arguments, 0, 1);
@@ -27,7 +33,22 @@ class Router {
             array_splice($arguments, 0, 1);
 
             $found = true;
-            $callback($arguments);
+
+            $controller = "\\Controllers\\". $page['controller'];
+
+            
+            $controller = new $controller();
+            
+            if(isset($arguments[0])){
+                $method = $arguments[0];
+                if(method_exists($controller, $method)){
+                    array_splice($arguments, 0, 1);
+    
+                    $controller->$method($arguments);
+                }
+            }
+
+            echo $controller->render($page['name']);
         }
     
         if(!$found){
