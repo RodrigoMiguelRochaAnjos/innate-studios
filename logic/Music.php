@@ -10,7 +10,7 @@ class Music
     public string $file;
     public string $background;
     public int $authorId;
-    private string $dateAdded;
+    public string $dateAdded;
     private string $datePublished;
 
     public function __construct(){

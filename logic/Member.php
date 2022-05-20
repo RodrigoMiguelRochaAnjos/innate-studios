@@ -9,6 +9,8 @@ abstract class Member {
     public string $age;
     public string $email;
     public string $password;
+    public string $bio = "";
+    public string $pfp;
     protected string $date_joined;
     protected string $token;
 
@@ -19,7 +21,7 @@ abstract class Member {
     public abstract function save();
     public abstract function add();
 
-    public static function params(string $name, int $age, string $email, string $password, string $date_joined = '', string $token = ''){
+    public static function params(string $name, int $age, string $email, string $password, string $date_joined = '', string $token = '', string $pfp = 'default.png'){
         $instance = new static();
 
         $instance->name = $name;
@@ -28,6 +30,7 @@ abstract class Member {
         $instance->password = $password;
         $instance->date_joined = $date_joined;
         $instance->token = $token;
+        $instance->pfp = $pfp;
 
         if($instance->date_joined == ''){
             $instance-> date_joined = date("Y-m-d H:i:s");
@@ -43,7 +46,7 @@ abstract class Member {
     public static function id(int $id){
         $instance = new static();
 
-        $fields = ["id", "name", "email", "password", "date_joined", "token"];
+        $fields = ["id", "name", "email", "password", "date_joined", "token", "age", "bio", "pfp"];
 
         $results = \Database\Query::read($fields, "members", "id = ?", [$id]);
 
@@ -54,6 +57,16 @@ abstract class Member {
             $instance->password = $result['password'];
             $instance->date_joined = $result['date_joined'];
             $instance->token = $result['token'];
+            $instance->age = $result['age'];
+            $instance->bio = $result['bio'];
+            
+            $pfp='default.png';
+
+            if($result['pfp'] != null){
+                $pfp = $result['pfp'];
+            }
+
+            $instance->pfp = $pfp;
         }
 
         return $instance;

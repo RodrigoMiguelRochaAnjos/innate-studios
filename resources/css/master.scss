@@ -85,6 +85,17 @@ nav{
                     font-size: 84px;
                     color: #f0f0f0;
                     font-family: "Poppins",sans-serif !important;
+                    line-height: 1em;
+                    &::before{
+                        content: '';
+                        height: 1.8em;
+                        width: 5px;
+                        background: #CC6467;
+                        display: block;
+                        position: absolute;
+                        left:0;
+                        top:0.1em;
+                    }
                 }
                 p{
                     margin-top: 42px;
@@ -98,17 +109,7 @@ nav{
                         
                     }
                 }
-                &::before{
-                    content: '';
-                    height: 129px;
-                    width: 5px;
-                    background: #CC6467;
-                    display: block;
-                    position: absolute;
-                    left:0;
-                    top:50%;
-                    transform: translateY(-50%);
-                }
+                
             }
         }
     }
@@ -290,6 +291,45 @@ nav{
                     img{
                         display: block;
                     }
+                }
+            }
+            
+        }
+    }
+    .artists{
+        display: flex;
+        text-align: center;
+        flex-wrap: wrap;
+        .artist{
+            flex-basis: 15%;
+            margin: 2%;
+            background-color: $black;
+            padding: 20px;
+            border-radius: 5px;
+            color: $white;
+            .name{
+                color: $red;
+            }
+            .pfp{
+                padding-bottom: 30px;
+                img{
+                    margin: 0px auto;
+                    display: block;
+                    width: 150px;
+                    border-radius: 100%;
+                }
+            }
+            a{
+                display: block;
+                text-decoration: none;
+                background: $red;
+                text-align: center;
+                padding: 10px;
+                color: $white;
+                text-transform: uppercase;
+                margin-top: 20px;
+                &:hover{
+                    background: #962024;
                 }
             }
         }

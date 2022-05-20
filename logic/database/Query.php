@@ -48,7 +48,6 @@ class Query {
         if($condition != ''){
             $sql = "SELECT $fields_text FROM $table WHERE $condition";
         }
-
         $q = $con->prepare($sql);
 
         if(!$q->execute($params)){

@@ -122,6 +122,18 @@ nav ul li a.c2a {
   font-size: 84px;
   color: #f0f0f0;
   font-family: "Poppins",sans-serif !important;
+  line-height: 1em;
+}
+
+.content .row section .name h1::before {
+  content: '';
+  height: 1.8em;
+  width: 5px;
+  background: #CC6467;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0.1em;
 }
 
 .content .row section .name p {
@@ -135,19 +147,6 @@ nav ul li a.c2a {
 .content .row section .name p b {
   color: #CC6467;
   font-family: "Poppins", sans-serif;
-}
-
-.content .row section .name::before {
-  content: '';
-  height: 129px;
-  width: 5px;
-  background: #CC6467;
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
 }
 
 .content .content-right {
@@ -388,5 +387,54 @@ nav ul li a.c2a {
 
 .content .content-right .music .player .player img {
   display: block;
+}
+
+.content .artists {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.content .artists .artist {
+  -ms-flex-preferred-size: 15%;
+      flex-basis: 15%;
+  margin: 2%;
+  background-color: #2C3638;
+  padding: 20px;
+  border-radius: 5px;
+  color: #f0f0f0;
+}
+
+.content .artists .artist .name {
+  color: #CC6467;
+}
+
+.content .artists .artist .pfp {
+  padding-bottom: 30px;
+}
+
+.content .artists .artist .pfp img {
+  margin: 0px auto;
+  display: block;
+  width: 150px;
+  border-radius: 100%;
+}
+
+.content .artists .artist a {
+  display: block;
+  text-decoration: none;
+  background: #CC6467;
+  text-align: center;
+  padding: 10px;
+  color: #f0f0f0;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.content .artists .artist a:hover {
+  background: #962024;
 }
 /*# sourceMappingURL=master.css.map */
