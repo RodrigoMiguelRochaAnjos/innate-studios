@@ -79,6 +79,146 @@ nav ul li a.c2a {
   height: 40px;
 }
 
+@-webkit-keyframes slide_login {
+  from {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  to {
+    -webkit-transform: translate(-50%);
+            transform: translate(-50%);
+  }
+}
+
+@keyframes slide_login {
+  from {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  to {
+    -webkit-transform: translate(-50%);
+            transform: translate(-50%);
+  }
+}
+
+footer {
+  background-color: #333;
+  width: 100%;
+  color: #f0f0f0;
+  text-align: center;
+}
+
+.background-login {
+  position: absolute;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-login .text div {
+  font-family: "Poppins";
+  font-weight: 700;
+  font-size: 7em;
+  line-height: .75em;
+  color: #CC6467;
+  letter-spacing: 0;
+  word-break: break-all;
+  opacity: .4;
+  text-align: justify;
+  -webkit-transition: -webkit-transform 1s ease;
+  transition: -webkit-transform 1s ease;
+  transition: transform 1s ease;
+  transition: transform 1s ease, -webkit-transform 1s ease;
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  -webkit-animation: slide_login 350s infinite linear forwards;
+          animation: slide_login 350s infinite linear forwards;
+  white-space: nowrap;
+}
+
+.background-login .text div span {
+  font-family: "Poppins";
+  font-weight: 700;
+  color: #2C3638;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+}
+
+.login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+}
+
+.login form {
+  background-color: #2C3638;
+  padding: 20px;
+  width: 20%;
+  color: #f0f0f0;
+}
+
+.login form h1 {
+  width: 5ch;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.login form h1::after {
+  content: '';
+  width: 70%;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  height: 4px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+.login form label {
+  display: block;
+}
+
+.login form .field {
+  padding-top: 12px;
+}
+
+.login form input {
+  display: block;
+  border: 0;
+  padding: 10px 15px;
+  outline: none;
+  width: 100%;
+}
+
+.login form input[type="submit"] {
+  color: #f0f0f0;
+  background-color: #CC6467;
+  width: 100px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.login form input[type="submit"]:hover {
+  background-color: #962024;
+}
+
 @-webkit-keyframes slide {
   from {
     -webkit-transform: translateX(100%);

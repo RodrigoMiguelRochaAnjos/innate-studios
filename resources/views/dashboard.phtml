@@ -1,0 +1,89 @@
+<h1>Dashboard</h1>
+<div class="metrics">
+    <div class="metric">
+        <h3>103,291</h3>
+        <p>Total Views</p>
+        <div class="rate">
+            +230
+        </div>
+    </div>
+    <div class="metric">
+        <h3>36</h3>
+        <p>Songs Published</p>
+        <div class="rate">
+            +2
+        </div>
+    </div>
+    <div class="metric">
+        <h3>5</h3>
+        <p>Partners</p>
+        <div class="rate">
+            +1
+        </div>
+    </div>
+    <div class="metric">
+        <h3>500</h3>
+        <p>Reviews</p>
+        <div class="rate">
+            +150
+        </div>
+    </div>
+    <div class="metric">
+        <h3>2</h3>
+        <p>Posts</p>
+        <div class="rate">
+            +0
+        </div>
+    </div>
+    <div class="metric">
+        <h3>5$</h3>
+        <p>Cost p/new listener</p>
+        <div class="rate">
+            +2$
+        </div>
+    </div>
+    <div class="metric">
+        <h3>103</h3>
+        <p>Reach</p>
+        <div class="rate">
+            +30
+        </div>
+    </div>
+    <div class="metric">
+        <h3>350$</h3>
+        <p>Revenue</p>
+        <div class="rate">
+            +100$
+        </div>
+    </div>
+</div>
+<h1>Music</h1>
+<ul class="song-list">
+    <?php $c =0 ?>
+    <?php foreach($music as $song): ?>
+        <?php $c++; ?>
+        <li>
+            <div class="id">
+                <?= $c . ". "?>
+            </div>
+            <div class="title">
+                <?= $song->title ?>
+            </div>
+            <div class="date">
+                <?= $song->dateAdded ?>
+            </div>
+
+            <div class="options">
+                <a href="#">Edit</a>
+                <a href="#">Delete</a>
+            </div>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+
+<script>
+    let option = document.querySelector("nav ul li:nth-child(1) a");
+
+    option.classList.add("selected");
+</script>

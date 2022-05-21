@@ -1,0 +1,262 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
+* {
+  margin: 0px;
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Mukta', sans-serif;
+}
+
+nav {
+  width: 250px;
+  height: 100vh;
+  float: left;
+  position: fixed;
+  background: radial-gradient(#262626, #151515);
+}
+
+nav .logo {
+  padding: 50px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul #exit {
+  color: #962024;
+  position: absolute;
+  bottom: 0;
+}
+
+nav ul #exit i {
+  color: #962024;
+}
+
+nav ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+nav ul li a {
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  color: #747474;
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+nav ul li a i {
+  color: #747474;
+}
+
+nav ul li a span {
+  padding-left: 10px;
+  font-weight: 600;
+}
+
+nav ul li a::before {
+  content: '';
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  background: -webkit-gradient(linear, left top, right top, color-stop(-400%, #962024), color-stop(50%, transparent));
+  background: linear-gradient(to right, #962024 -400%, transparent 50%);
+  top: 0;
+  left: 0;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  -webkit-transition: -webkit-transform ease-in-out 1s;
+  transition: -webkit-transform ease-in-out 1s;
+  transition: transform ease-in-out 1s;
+  transition: transform ease-in-out 1s, -webkit-transform ease-in-out 1s;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  width: 0px;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #962024;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  -webkit-transition: width ease-in-out .3s;
+  transition: width ease-in-out .3s;
+}
+
+nav ul li a.selected {
+  color: #f0f0f0;
+  background-color: #222222;
+}
+
+nav ul li a.selected i {
+  color: #f0f0f0;
+}
+
+nav ul li a.selected::before {
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+}
+
+nav ul li a.selected::after {
+  width: 3px;
+}
+
+nav ul li:hover a {
+  background-color: #222222;
+}
+
+nav ul li:hover a::before {
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+}
+
+nav ul li:hover a::after {
+  width: 3px;
+}
+
+.content {
+  background: radial-gradient(#313131, #222222);
+  color: #f0f0f0;
+  min-height: 100vh;
+  padding: 50px;
+  padding-left: 300px;
+}
+
+.content .metrics {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.content .metrics .metric {
+  -ms-flex-preferred-size: calc(25% - 20px);
+      flex-basis: calc(25% - 20px);
+  margin: 10px;
+  border: 1px solid #747474;
+  padding: 25px;
+  background: -webkit-gradient(linear, left top, right top, from(#262626), to(#313131));
+  background: linear-gradient(to right, #262626, #313131);
+  position: relative;
+}
+
+.content .metrics .metric h3 {
+  font-size: 1.5em;
+  color: #f0f0f0;
+}
+
+.content .metrics .metric p {
+  text-transform: uppercase;
+  color: #747474;
+  font-weight: 700;
+}
+
+.content .metrics .metric .rate {
+  position: absolute;
+  background-color: #64ba750f;
+  top: 25px;
+  right: 25px;
+  padding: 3px 10px;
+  color: #64ba75;
+  font-weight: 600;
+  font-size: .95em;
+}
+
+.content .song-list {
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid #747474;
+  border-left: 0px;
+  height: 50vh;
+  direction: rtl;
+  overflow: hidden;
+  overflow-y: scroll;
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+
+.content .song-list.songs {
+  height: 80vh;
+}
+
+.content .song-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.content .song-list::-webkit-scrollbar-track {
+  background: #494949;
+}
+
+.content .song-list::-webkit-scrollbar-thumb {
+  background: #181818;
+}
+
+.content .song-list::-webkit-scrollbar-thumb:hover {
+  background: #151515;
+}
+
+.content .song-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+  direction: ltr;
+  border-bottom: 1px solid #747474;
+}
+
+.content .song-list li .id {
+  padding-right: 10px;
+}
+
+.content .song-list li .title {
+  padding: 0 10px;
+}
+
+.content .song-list li .date {
+  border-left: 1px solid #f0f0f0;
+  padding-left: 10px;
+}
+
+.content .song-list li .options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: auto;
+  text-transform: uppercase;
+}
+
+.content .song-list li .options a {
+  color: #747474;
+  text-decoration: none;
+  display: block;
+  padding: 0 20px;
+}
+/*# sourceMappingURL=dashboard.css.map */

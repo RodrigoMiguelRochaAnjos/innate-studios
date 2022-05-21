@@ -72,6 +72,38 @@ abstract class Member {
         return $instance;
     }
 
+    public static function authenticate(string $email, string $password){
+        $instance = new static();
+
+        $fields = ["id", "name", "email", "password", "date_joined", "token", "age", "bio", "pfp"];
+
+        $results = \Database\Query::read($fields, "members", "email = ?", [$email]);
+
+        foreach($results as $result){
+            if(password_verify($password, $result['password'])){
+                $instance->id = $result['id'];
+                $instance->name = $result['name'];
+                $instance->email = $result['email'];
+                $instance->password = $result['password'];
+                $instance->date_joined = $result['date_joined'];
+                $instance->token = $result['token'];
+                $instance->age = $result['age'];
+                $instance->bio = $result['bio'];
+                
+                $pfp='default.png';
+    
+                if($result['pfp'] != null){
+                    $pfp = $result['pfp'];
+                }
+    
+                $instance->pfp = $pfp;
+                break;
+            }
+        }
+
+        return $instance;
+    }
+
     private function generateToken(){
         $token = '1234567890qwertyuiopasdfghjklzxcvbnm';
         $token = str_shuffle($token);

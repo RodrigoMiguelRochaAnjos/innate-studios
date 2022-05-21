@@ -2,9 +2,9 @@
 
 $black: #2C3638;
 $red: #CC6467;
+$darker_red: #962024;
 $white: #f0f0f0;
 $gray: #BCC1C2;
-
 *{
     margin:0px;
     max-width: 100%;
@@ -54,6 +54,112 @@ nav{
                 border-radius: 16px;
                 width: 150px;
                 height: 40px;
+            }
+        }
+    }
+}
+@keyframes slide_login {
+    from{
+        transform: translateX(0%);
+    }to{
+        transform: translate(-50%);
+    }
+}
+footer{
+    background-color: #333;
+    width: 100%;
+    color: $white;
+    text-align: center;
+}
+.background-login{
+    position: absolute;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    .text{
+        div{
+            font-family: "Poppins";
+            font-weight: 700;
+            font-size: 7em;
+            line-height: .75em;
+            color: $red;
+            letter-spacing: 0;
+            word-break: break-all;
+            opacity: .4;
+            text-align: justify;
+            
+            transition: transform 1s ease;
+            transform: translateX(0%);
+            width: fit-content;
+            max-width: fit-content;
+            animation: slide_login 350s infinite linear forwards;
+            white-space: nowrap;
+            span{
+                font-family: "Poppins";
+                font-weight: 700;
+                color: $black;
+
+            }
+        }
+        
+        
+       
+        
+        
+        
+    }
+}
+footer{
+    position: absolute;
+    bottom: 0;
+}
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    form{
+        background-color: $black;
+        padding: 20px;
+        width: 20%;
+        color: $white;
+        h1{
+            width: 5ch;
+            position: relative;
+            margin-bottom: 20px;
+            &::after{
+                content: '';
+                width: 70%;
+                position: absolute;
+                left: 0;
+                bottom: -10px;
+                height: 4px;
+                background-color: $white;
+                border-radius: 10px;
+            }
+        }
+        label{
+            display: block;
+        }
+        .field{
+            padding-top: 12px;
+        }
+        input{
+            display: block;
+            border:0;
+            padding: 10px 15px;
+            outline: none;
+            width: 100%;
+            &[type="submit"]{
+                color: $white;
+                background-color: $red;
+                width: 100px;
+                cursor: pointer;
+                margin-left: auto;
+                &:hover{
+                    background-color: $darker_red;
+                }
             }
         }
     }

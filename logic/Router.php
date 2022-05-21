@@ -48,12 +48,11 @@ class Router {
                 }
             }
 
-            echo $controller->render($page['name']);
+            echo $controller->view();
         }
     
         if(!$found){
-            $notFoundCallback = self::$routes['/404'];
-            $notFoundCallback();
+            echo "Page not found";
         }
     }
 }

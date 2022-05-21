@@ -1,0 +1,42 @@
+<div class="top">
+    <h1>Music</h1>
+    <div class="search">
+        <form action="dashboard-music/search">
+            <select name="filter" id="">
+                <option value="title">title</option>
+                <option value="title">title</option>
+            </select>
+            <input type="search" name="search" id="" placeholder="Insert search argument">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
+<ul class="song-list songs">
+    <?php $c =0 ?>
+    <?php foreach($music as $song): ?>
+        <?php $c++; ?>
+        <li>
+            <div class="id">
+                <?= $c . ". "?>
+            </div>
+            <div class="title">
+                <?= $song->title ?>
+            </div>
+            <div class="date">
+                <?= $song->dateAdded ?>
+            </div>
+
+            <div class="options">
+                <a href="#">Edit</a>
+                <a href="#">Delete</a>
+            </div>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+
+<script>
+    let option = document.querySelector("nav ul li:nth-child(2) a");
+
+    option.classList.add("selected");
+</script>

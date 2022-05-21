@@ -1,4 +1,6 @@
 <?php
+namespace Models;
+
 use \Database\Query;
 use \Members\Artist;
 use \Studio\Productions\Music;
