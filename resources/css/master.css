@@ -666,4 +666,81 @@ footer {
 .content .artists .artist a:hover {
   background: #962024;
 }
+
+.artist-single {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #2C3638;
+  width: 50%;
+  margin: 0px;
+  padding: 20px;
+  color: #f0f0f0;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.artist-single h3 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.artist-single h3 .user .followers {
+  font-size: .75em;
+  font-weight: 400;
+  color: #bac8cb;
+}
+
+.artist-single h3 a {
+  display: block;
+  margin-left: auto;
+  padding: 10px 20px;
+  color: #f0f0f0;
+  background-color: #CC6467;
+  text-decoration: none;
+  -webkit-transition: background ease-in-out .3s;
+  transition: background ease-in-out .3s;
+}
+
+.artist-single h3 a:hover {
+  background-color: #962024;
+}
+
+.artist-single .artist-left {
+  -ms-flex-preferred-size: 30%;
+      flex-basis: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.artist-single .artist-left img {
+  display: block;
+  width: 90%;
+  border-radius: 10px;
+}
+
+.artist-single .artist-right {
+  -ms-flex-preferred-size: 70%;
+      flex-basis: 70%;
+}
+
+.artist-single .artist-right .bio {
+  padding: 20px 0px;
+  color: #c6c5c5;
+}
 /*# sourceMappingURL=master.css.map */

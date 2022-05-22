@@ -1,13 +1,27 @@
-<div class="content" id="content">
-    <div class="artist">
-        <div class="pfp">
-            <img src="/resources/img/<?= $artist->pfp ?>" alt="">
+<div class="content artist-dark" id="content">
+    <div class="artist-single">
+        <div class="artist-left">
+            <div class="pfp">
+                <img src="/resources/img/<?= $artist->pfp ?>" alt="">
+            </div>
+            
         </div>
-        <div class="name">
-            <h3><?= $artist->name  ?></h3>
+        <div class="artist-right">
+            <div class="name">
+                <h3>
+                    <div class="user">
+                        <?= $artist->name  ?> (<?= $artist->age?>)
+                        <p class="followers"><?= $artist->followers; ?> Followers</p>
+                    </div>
+                    <a href="artist/follow/<?= $artist->pfp ?>">Follow</a>
+                </h3>
+            </div>
+            <p class="bio"><?= $artist->bio ?></p>
+            <p>bands: <?php foreach($bands as $band) echo $band->name.' '; ?></p>
+            <div class="follow">
+                
+            </div>
         </div>
-        <p>age: <?= $artist->age?></p>
-        <a href="#">find out more</a>
     </div>
     <?php foreach($bands as $band): ?>
         <h1><?= $band->name ?></h1>
