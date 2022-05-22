@@ -9,9 +9,17 @@
         <p>age: <?= $artist->age?></p>
         <a href="#">find out more</a>
     </div>
-    <?php foreach($musics as $music): ?>
-        <?php if($music->authorId == $artist->id): ?>
-            <h1><?= $music->title ?></h1>
-        <?php endif; ?>
+    <?php foreach($bands as $band): ?>
+        <h1><?= $band->name ?></h1>
+        <ul>
+            <?php foreach($band->getAlbums() as $album): ?>
+               <li><?= $album->title; ?></li>
+               <ul>
+                   <?php foreach($album->getMusic() as $music): ?>
+                       <li><?= $music->title; ?></li>
+                   <?php endforeach; ?>
+               </ul>
+            <?php endforeach; ?>
+        </ul>
     <?php endforeach; ?>
 </div>

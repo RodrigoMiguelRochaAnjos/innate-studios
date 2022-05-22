@@ -54,31 +54,31 @@
                 <div class="music">
                     <div class="bar-music"></div>
                     <ul>
-                        <li class="music-selected"><div class="title">Save Yourself (Bonus Track)</div><div class="time">05:22</div></li>
-                        <li><div class="title">Save Yourself (Bonus Track)</div><div class="time">05:22</div></li>
-                        <li><div class="title">Save Yourself (Bonus Track)</div><div class="time">05:22</div></li>
-                        <li><div class="title">Save Yourself (Bonus Track)</div><div class="time">05:22</div></li>
-                        <li><div class="title">Save Yourself (Bonus Track)</div><div class="time">05:22</div></li>
-                        <li><div class="title">Save Yourself (Bonus Track)</div><div class="time">05:22</div></li>
-                        <li><div class="title">Save Yourself (Bonus Track)</div><div class="time">05:22</div></li>
-                        <li><div class="title">Save Yourself (Bonus Track)</div><div class="time">05:22</div></li>
-                        <li><div class="title">Save Yourself (Bonus Track)</div><div class="time">05:22</div></li>
+                        <?php foreach($music as $song): ?>
+                            <li class="music-listing">
+                                <div class="title"><?=$song->title?></div><div class="time">05:22</div>
+                                <input class="song" type="hidden" value="/resources/music/<?=$song->file?>">
+                            </li>
+                            <?php endforeach; ?>
+                            <audio id="audio" src=""></audio>
                     </ul>
                     <div class="player">
                         <div class="progress-bar">
-                            <div class="bar"></div>
+                            <div id="progress" class="bar"></div>
                         </div>
                         <div class="play">
-                            <img src="img/pause.png" alt="">
+                            <img id="play" src="/resources/img/play.png" alt="">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="back-text">
                 <div class="scroll-text">
-                    <h1>Save Yourself</h1>
+                    <h1 id="song-playing"></h1>
                 </div>
             </div>
         </section>
     </div>
 </div>
+
+<script src="/resources/js/main.js"></script>

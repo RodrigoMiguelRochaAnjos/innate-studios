@@ -6,13 +6,13 @@ use \Database\Query;
 abstract class Member {
     public int $id=0;
     public string $name;
-    public string $age;
-    public string $email;
-    public string $password;
     public string $bio = "";
     public string $pfp;
-    protected string $date_joined;
-    protected string $token;
+    public string $email;
+    public string $password;
+    public string $token;
+    public string $date_joined;
+    public string $date_updated;
 
     function __construct(){
         
@@ -21,61 +21,57 @@ abstract class Member {
     public abstract function save();
     public abstract function add();
 
-    public static function params(string $name, int $age, string $email, string $password, string $date_joined = '', string $token = '', string $pfp = 'default.png'){
-        $instance = new static();
+    // public static function params(string $name, int $bio, string $email, string $password , string $token = '', string $pfp = 'default.png'){
+    //     $instance = new static();
 
-        $instance->name = $name;
-        $instance->age = $age;
-        $instance->email = $email;
-        $instance->password = $password;
-        $instance->date_joined = $date_joined;
-        $instance->token = $token;
-        $instance->pfp = $pfp;
+    //     $instance->id = $id;
+    //     $instance->name = $name;
+    //     $instance->bio = $bio;
+    //     $instance->pfp = $pfp;
+    //     $instance->email = $email;
+    //     $instance->password = $password;
+    //     $instance->token = $token;
 
-        if($instance->date_joined == ''){
-            $instance-> date_joined = date("Y-m-d H:i:s");
-        }
+    //     if($instance->date_joined == ''){
+    //         $instance-> date_joined = date("Y-m-d H:i:s");
+    //     }
+    //     if($instance->date_updated == ''){
+    //         $instance-> date_updated = date("Y-m-d H:i:s");
+    //     }
 
-        if($instance->token == ''){
-            $instance->generateToken();
-        }
+    //     if($instance->token == ''){
+    //         $instance->generateToken();
+    //     }
 
-        return $instance;
-    }
+    //     return $instance;
+    // }
 
-    public static function id(int $id){
-        $instance = new static();
+    // public static function id(int $id){
+    //     $instance = new static();
 
-        $fields = ["id", "name", "email", "password", "date_joined", "token", "age", "bio", "pfp"];
+    //     $fields = ["id", "name", "bio", "pfp", "email", "password", "token", "date_joined", "date_updated"];
 
-        $results = \Database\Query::read($fields, "members", "id = ?", [$id]);
+    //     $results = \Database\Query::read($fields, "members", "id = ?", [$id]);
 
-        foreach($results as $result){
-            $instance->id = $result['id'];
-            $instance->name = $result['name'];
-            $instance->email = $result['email'];
-            $instance->password = $result['password'];
-            $instance->date_joined = $result['date_joined'];
-            $instance->token = $result['token'];
-            $instance->age = $result['age'];
-            $instance->bio = $result['bio'];
-            
-            $pfp='default.png';
+    //     foreach($results as $result){
+    //         $instance->id = $result['id'];
+    //         $instance->name = $result['name'];
+    //         $instance->bio = $result['bio'];
+    //         $instance->pfp = $result['pfp'];
+    //         $instance->email = $result['email'];
+    //         $instance->password = $result['password'];
+    //         $instance->token = $result['token'];
+    //         $instance->date_joined = $result['date_joined'];
+    //         $instance->date_updated = $result['date_updated'];
+    //     }
 
-            if($result['pfp'] != null){
-                $pfp = $result['pfp'];
-            }
-
-            $instance->pfp = $pfp;
-        }
-
-        return $instance;
-    }
+    //     return $instance;
+    // }
 
     public static function authenticate(string $email, string $password){
         $instance = new static();
 
-        $fields = ["id", "name", "email", "password", "date_joined", "token", "age", "bio", "pfp"];
+        $fields = ["id", "name", "bio", "pfp", "email", "password", "token", "date_joined", "date_updated"];
 
         $results = \Database\Query::read($fields, "members", "email = ?", [$email]);
 
@@ -83,20 +79,13 @@ abstract class Member {
             if(password_verify($password, $result['password'])){
                 $instance->id = $result['id'];
                 $instance->name = $result['name'];
+                $instance->bio = $result['bio'];
+                $instance->pfp = $result['pfp'];
                 $instance->email = $result['email'];
                 $instance->password = $result['password'];
-                $instance->date_joined = $result['date_joined'];
                 $instance->token = $result['token'];
-                $instance->age = $result['age'];
-                $instance->bio = $result['bio'];
-                
-                $pfp='default.png';
-    
-                if($result['pfp'] != null){
-                    $pfp = $result['pfp'];
-                }
-    
-                $instance->pfp = $pfp;
+                $instance->date_joined = $result['date_joined'];
+                $instance->date_updated = $result['date_updated'];
                 break;
             }
         }
@@ -104,7 +93,7 @@ abstract class Member {
         return $instance;
     }
 
-    private function generateToken(){
+    protected function generateToken(){
         $token = '1234567890qwertyuiopasdfghjklzxcvbnm';
         $token = str_shuffle($token);
         $token = substr($token, 0, 16);

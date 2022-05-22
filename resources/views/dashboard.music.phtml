@@ -1,10 +1,10 @@
 <div class="top">
     <h1>Music</h1>
     <div class="search">
-        <form action="dashboard-music/search">
+        <form action="/dashboard-music/search" method="POST">
             <select name="filter" id="">
-                <option value="title">title</option>
-                <option value="title">title</option>
+                <option value="title" <?= $selected == "title" ? "selected" : "" ?>>title</option>
+                <option value="date_published" <?= $selected == "date_published" ? "selected" : "" ?>>Date Published</option>
             </select>
             <input type="search" name="search" id="" placeholder="Insert search argument">
             <button type="submit"><i class="fa fa-search"></i></button>

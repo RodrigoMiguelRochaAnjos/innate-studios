@@ -24,11 +24,11 @@ class ArtistsController extends Controller{
         
         $artist = Artist::id($id);
 
-        $artist->getMusic();
+        $artist->getBands();
 
         $params = [
             'artist' => $artist,
-            'musics' => $artist->music
+            'bands' => $artist->bands
         ];
         
         echo $this->render("artist", $params);

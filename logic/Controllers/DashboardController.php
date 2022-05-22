@@ -16,10 +16,11 @@ class DashboardController extends Controller{
 
         $artist = Artist::id($id);
 
-        $artist->getMusic();
+        $artist->getBands();
+
 
         $params = [
-            'music' => $artist->music,
+            'bands' => $artist->bands,
             'artist' => $artist
         ];
 

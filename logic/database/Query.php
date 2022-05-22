@@ -53,7 +53,6 @@ class Query {
         if(!$q->execute($params)){
             exit("error 500");
         }
-
         $resultset = $q->get_result();
         $results = $resultset->fetch_all();
 
@@ -116,6 +115,39 @@ class Query {
 
     public static function delete(){
 
+    }
+
+    public static function custom($query, $params=[]){
+        $con = new Connection();
+        $con = $con->getConnection();
+
+        $types = "";
+
+        foreach($params as $value){
+            $type = gettype($value)[0];
+
+            $types .= $type;
+        }
+
+        $q = $con->prepare($query);
+        if(!empty($params)){
+            $q->bind_param($types, ...$params);
+        }
+
+        if(!$q->execute()){
+            exit("error 500");
+        }
+
+        $resultset = $q->get_result();
+        $results = $resultset->fetch_all();
+
+        $data = [];
+
+        foreach($results as $result){
+            $data[] = $result;
+        }
+
+        return $data;
     }
 
 }

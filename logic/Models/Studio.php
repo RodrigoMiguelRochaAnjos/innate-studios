@@ -2,6 +2,7 @@
 namespace Models;
 
 use \Database\Query;
+use \Members\Member;
 use \Members\Artist;
 use \Studio\Productions\Music;
 
@@ -15,41 +16,49 @@ class Studio {
     }
 
     public function getMembers(){
-        $params = ["id", "name", "email", "password", "date_joined", "token", "type", "age","bio",'pfp'];
+
+        $fields = ["id", "name", "bio", "pfp", "email", "password", "token", "date_joined", "date_updated"];
 
         $results = \Database\Query::read($params, "members");
 
         foreach($results as $result){
-            $pfp = 'default.png';
-            if($result["pfp"] != null){
-                $pfp = $result["pfp"];
-            }
-            $artist = Artist::params($result["name"], $result["age"], $result["email"], $result["password"], $result["date_joined"],$result["token"], $pfp);
-            $artist->id = $result["id"];
-            $artist->bio = $result["bio"];
+            $artist = Member::params($result['name'], $result['bio'], $result['email'], $result['password'] , $result['token'], $result['pfp']);
+
+            $artist->id = $result['id'];
+            $artist->date_joined = $result['date_joined'];
+            $artist->date_updated = $result['date_updated'];
 
             $this->members[] = $artist;
         }
 
     }
     public function getArtists(){
-        $params = ["id", "name", "email", "password", "date_joined", "token", "type", "age","bio",'pfp'];
 
-        $results = \Database\Query::read($params, "members");
-
+        $results = \Database\Query::custom("SELECT 
+            m.id, 
+            m.name, 
+            m.bio, 
+            m.pfp, 
+            m.email, 
+            m.password, 
+            m.token,
+            a.age,
+            a.followers,
+            m.date_joined, 
+            m.date_updated
+            FROM members m 
+            INNER JOIN artists a on a.id_member = m.id
+        ");
+        
         foreach($results as $result){
-            if($result["type"] == "Artist"){
-                $pfp = 'default.png';
-                if($result["pfp"] != null){
-                    $pfp = $result["pfp"];
-                }
-                $artist = Artist::params($result["name"], $result["age"], $result["email"], $result["password"], $result["date_joined"],$result["token"], $pfp);
-                $artist->id = $result["id"];
-                $artist->bio = $result["bio"];
-    
-                $this->artists[] = $artist;
-            }
-        }
+            $artist = Artist::params($result[1], $result[2], $result[4],$result[7], $result[5] , $result[6], $result[3]);
 
+            $artist->id = $result[0];
+            $artist->followers = $result[8];
+            $artist->date_joined= $result[9];
+            $artist->date_updated = $result[10];
+
+            $this->artists[] = $artist;
+        }
     }
 }

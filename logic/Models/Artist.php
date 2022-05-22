@@ -2,31 +2,97 @@
 namespace Members;
 
 use \Studio\Productions\Music;
+use \Studio\Band;
 
 class Artist extends Member{
-    public array $music=[];
+    public array $bands=[];
+    public int $followers;
+    public string $age;
 
     function __construct(){
 
     }
 
-    public function getMusic(){
-        $params = ["id", "title", "file", "background", "artist_id", "date_added", "date_published"];
+    public static function params(string $name, string $bio, string $email, int $age, string $password , string $token = '', string $pfp = 'default.png'){
+        $instance = new static();
 
-        $results = \Database\Query::read($params, "music", "artist_id = ?", [$this->id]);
+        $instance->name = $name;
+        $instance->bio = $bio;
+        $instance->pfp = $pfp;
+        $instance->age= $age;
+        $instance->email = $email;
+        $instance->password = $password;
+        $instance->token = $token;
+        $instance->followers = 0;
+
+        $instance-> date_joined = date("Y-m-d H:i:s");
+        $instance-> date_updated = date("Y-m-d H:i:s");
+
+        if($instance->token == ''){
+            $instance->generateToken();
+        }
+
+        return $instance;
+    }
+    public static function id(int $id){
+        $instance = new static();
+
+        $results = \Database\Query::custom("SELECT 
+            m.id, 
+            m.name, 
+            m.bio, 
+            m.pfp, 
+            m.email, 
+            m.password, 
+            m.token,
+            a.age,
+            a.followers,
+            m.date_joined, 
+            m.date_updated
+            FROM members m 
+            INNER JOIN artists a on a.id_member = m.id
+            WHERE m.id = ?
+        ", [$id]);
 
         foreach($results as $result){
-            $background = "";
-            if($result['background'] != null){
-                $background = $result['background'];
-            }
+            $instance->id = $result[0];
+            $instance->name = $result[1];
+            $instance->bio = $result[2];
+            $instance->pfp = $result[3];
+            $instance->email = $result[4];
+            $instance->password = $result[5];
+            $instance->token = $result[6];
+            $instance->age = $result[7];
+            $instance->followers = $result[8];
+            $instance->date_joined = $result[9];
+            $instance->date_updated = $result[10];
+        }
 
-            $music = Music::params($result['title'], $result['file'], $result['date_published'], $background);
-            $music->id = $result['id'];
-            $music->dateAdded = $result['date_added'];
-            $music->authorId = $result['artist_id'];
+        return $instance;
+    }
 
-            $this->music[] = $music;
+    public function getBands(){
+
+        $results = \Database\Query::custom("SELECT b.id, b.name, b.image, b.num_songs, b.followers, b.date_created, b.date_updated 
+        FROM artist_bands ab INNER JOIN band b on ab.id_bands = b.id
+        INNER JOIN artists a on a.id = ab.id_artist WHERE ab.id_artist = ?", [$this->id]);
+
+        foreach($results as $result){
+            $result = [
+                'id' => $result[0], 
+                'name' => $result[1], 
+                'image' => $result[2], 
+                'num_songs' => $result[3], 
+                'followers' => $result[4], 
+                'date_created' => $result[5], 
+                'date_updated' => $result[6] 
+            ];
+            $band = Band::params($result['name'], $result['image'], $result['num_songs'], $result['followers']);
+            $band->id = $result['id'];
+            $band->date_created = $result['date_created'];
+            $band->date_updated = $result['date_updated'];
+
+            $this->bands[] = $band;
         }
 
     }
@@ -47,29 +113,52 @@ class Artist extends Member{
     }
     
     public function save() {
+
         $params = [
-            'name' => $this->name,
-            'age' => $this->age,
-            'email' => $this->email,
-            'password' => $this->password,
-            'date_joined' => $this->date_joined,
-            'token' => $this->token
+            "name" => $this->name, 
+            "bio" => $this->bio, 
+            "pfp" => $this->pfp,
+            "email" => $this->email, 
+            "password" => $this->password, 
+            "token" => $this->token, 
+            "date_joined" => $this->date_joined, 
+            "date_updated" => $this->date_updated
         ];
-        
+
         \Database\Query::update($params, "members", "id = ?", [$this->id]);
+
+        $params = [
+            "followers" => $this->followers,
+            "age" => $this->age
+        ];
+
+        \Database\Query::update($params, "artists", "id_member = ?", [$this->id]);
+
     }
 
     public function add() {
         $params = [
-            'name' => $this->name,
-            'age' => $this->age,
-            'email' => $this->email,
-            'password' => $this->password,
-            'date_joined' => $this->date_joined,
-            'token' => $this->token,
-            'type' => "Artist"
+            "name" => $this->name, 
+            "bio" => $this->bio, 
+            "pfp" => $this->pfp,
+            "email" => $this->email, 
+            "password" => $this->password, 
+            "token" => $this->token, 
+            "date_joined" => $this->date_joined, 
+            "date_updated" => $this->date_updated
         ];
-        
+
         \Database\Query::create($params, "members");
+
+        $results = \Database\Query::custom("SELECT id FROM members ORDER BY id DESC LIMIT 1");
+        $id=$results[0][0];
+
+        $params = [
+            "id_member" => $id,
+            "followers" => $this->followers,
+            "age" => $this->age
+        ];
+
+        \Database\Query::create($params, "artists");
     }
 }

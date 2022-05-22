@@ -8,6 +8,16 @@
                 <div class="name">
                     <h3><?= $member->name  ?></h3>
                 </div>
+                <div class="band">
+                    <b>bands:</b>
+                    <p>
+                        <?php
+                        $member->getBands();
+                        foreach($member->bands as $band): ?>
+                            <?= $band->name ?>
+                        <?php endforeach; ?>
+                    </p>
+                </div>
                 <p>age: <?= $member->age?></p>
                 <a href="/artists/id/<?= $member->id ?>">find out more</a>
             </div>

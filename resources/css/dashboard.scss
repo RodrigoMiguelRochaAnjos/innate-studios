@@ -150,6 +150,8 @@ nav{
 
     }
     .song-list{
+        background: linear-gradient(to right, $black4, $black5);
+
         &.songs{
             height: 80vh;
         }
@@ -184,6 +186,12 @@ nav{
             display: flex;
             padding: 10px;
             direction: ltr;
+            &.album{
+                padding-left: 20px;
+            }
+            &.individual-song{
+                padding-left: 50px;
+            }
             .id{
                 padding-right: 10px;
             }
@@ -208,6 +216,46 @@ nav{
                 }
             }
             border-bottom: 1px solid $black7;
+        }
+    }
+}
+.top{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+    h1{
+        margin-left: auto;
+        margin-left: 0;
+    }
+    .search {
+        margin-left: auto;
+        form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            select{
+                height: 100%;
+                border:0;
+                outline: none;
+                display: block;
+                padding: 4px 15px;
+            }
+            input{
+                height: 100%;
+                border:0;
+                outline: none;
+                display: block;
+                padding: 5px 15px;
+            }
+            button{
+                height: 100%;
+                border:0;
+                outline: none;
+                background-color: $darker_red;
+                color: $white;
+                padding: 5px 15px;
+            }
         }
     }
 }

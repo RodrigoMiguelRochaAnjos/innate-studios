@@ -59,25 +59,31 @@
 </div>
 <h1>Music</h1>
 <ul class="song-list">
-    <?php $c =0 ?>
-    <?php foreach($music as $song): ?>
-        <?php $c++; ?>
-        <li>
-            <div class="id">
-                <?= $c . ". "?>
-            </div>
-            <div class="title">
-                <?= $song->title ?>
-            </div>
-            <div class="date">
-                <?= $song->dateAdded ?>
-            </div>
+    <?php foreach($bands as $band): ?>
+        <li><b><?=$band->name?> - Band</b></li>
+        <?php foreach($band->getAlbums() as $album): ?>
+            <?php $c =0 ?>
+            <li class="album"><b><?=$album->title ?> - Album</b></li>
+            <?php foreach($album->getMusic() as $song): ?>
+                <?php $c++; ?>
+                <li class="individual-song">
+                    <div class="id">
+                        <?= $c . ". "?>
+                    </div>
+                    <div class="title">
+                        <?= $song->title ?>
+                    </div>
+                    <div class="date">
+                        <?= $song->dateAdded ?>
+                    </div>
 
-            <div class="options">
-                <a href="#">Edit</a>
-                <a href="#">Delete</a>
-            </div>
-        </li>
+                    <div class="options">
+                        <a href="#">Edit</a>
+                        <a href="#">Delete</a>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
     <?php endforeach; ?>
 </ul>
 

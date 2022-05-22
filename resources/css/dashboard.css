@@ -184,6 +184,8 @@ nav ul li:hover a::after {
 }
 
 .content .song-list {
+  background: -webkit-gradient(linear, left top, right top, from(#262626), to(#313131));
+  background: linear-gradient(to right, #262626, #313131);
   list-style-type: none;
   padding: 0;
   border: 1px solid #747474;
@@ -226,6 +228,14 @@ nav ul li:hover a::after {
   border-bottom: 1px solid #747474;
 }
 
+.content .song-list li.album {
+  padding-left: 20px;
+}
+
+.content .song-list li.individual-song {
+  padding-left: 50px;
+}
+
 .content .song-list li .id {
   padding-right: 10px;
 }
@@ -258,5 +268,64 @@ nav ul li:hover a::after {
   text-decoration: none;
   display: block;
   padding: 0 20px;
+}
+
+.top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-bottom: 20px;
+}
+
+.top h1 {
+  margin-left: auto;
+  margin-left: 0;
+}
+
+.top .search {
+  margin-left: auto;
+}
+
+.top .search form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.top .search form select {
+  height: 100%;
+  border: 0;
+  outline: none;
+  display: block;
+  padding: 4px 15px;
+}
+
+.top .search form input {
+  height: 100%;
+  border: 0;
+  outline: none;
+  display: block;
+  padding: 5px 15px;
+}
+
+.top .search form button {
+  height: 100%;
+  border: 0;
+  outline: none;
+  background-color: #962024;
+  color: #f0f0f0;
+  padding: 5px 15px;
 }
 /*# sourceMappingURL=dashboard.css.map */
