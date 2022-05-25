@@ -2,13 +2,21 @@
 namespace Controllers;
 
 use \Studio\Productions\Music;
+use \Models\Studio;
 
 class HomeController extends Controller{
     public function view(){
+        $studio = new Studio();
         $music = new Music();
-
+        
+        $studio->getArtists();
         $music = $music->getAllMusic();
 
-        echo $this->render("home", ['music' => $music]);
+        $params = [
+            'music' => $music,
+            'artists' => $studio->artists
+        ];
+
+        echo $this->render("home", $params);
     }
 }

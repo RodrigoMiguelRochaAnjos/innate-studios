@@ -1,84 +1,88 @@
-<div class="content" style="background-image: url('/resources/img/bg.png');">
-    <div class="row">
-        <section class="left">
-            <div class="name">
-                <h1>INNATE <br>STUDIOS</h1>
-                <p>Feel the <b>rythm</b> flow</p>
+<div class="content">
+        <section id="hero">
+            <div class="player">
+                <div class="progress-bar">
+                    <div id="progress" class="bar"></div>
+                </div>
+                <div class="play">
+                    <img id="play" src="/resources/img/play.png" alt="">
+                </div>
             </div>
-        </section>
-        <section class="right">
+            <img src="/resources/img/bg.png" alt="image">
+            <div class="top-right">
+                <ul>
+                    <?php 
+                    $selected=false; 
+                    
+                    foreach($music as $song): ?>
+                        <li class="music-listing <?= !$selected ? "selected" : "" ?>">
+                        <div class="title">
+                            <?= $song->title ?>
+
+                        </div>
+                            <input class="song" type="hidden" value="/resources/music/<?= $song->file ?>">
+                        </li>
+                        <?php $selected = true; ?>
+                    <?php endforeach; ?>
+                        <audio id="audio" src=""></audio>
+                </ul>
+            </div>
+            <div class="hero-center">
+                <h1>INNATE STUDIOS</h1>
+                <p>Feel the rythm flow</p>
+            </div>
             
-            <div class="content-right">
-                <h1>NEWS</h1>
-                <div class="news">
-                    <div style="background-image: url('/resources/img/news.png');" class="post">
-                        <div class="cover">
-                            <div class="bottom">
-                                <h3>NEW SONG</h3>
-                                <div class="bottom-inner">
-                                    <p>by <span>Pearl Tongue</span></p>
-                                    <div class="date">
-                                        26/04/2022
-                                    </div>
+        </section>
+        <section class="popular-artists" style="background: url('/resources/img/bg2.png');">
+            <h1>Popular Artists Right Now</h1>
+            <div>    
+                <div class="artists">
+                    <?php
+                    foreach($artists as $artist):  ?>
+                        <div class="artist">
+                            <div class="image">
+                                <img src="/resources/img/<?= $artist->pfp ?>" alt="Image">
+                            </div>
+                            <div class="inner-artist">
+                                <h3><?= $artist->name ?> (<?= $artist->age ?>)</h3>
+                                <div class="followers">
+                                    <?= $artist->followers ?> Followers
                                 </div>
+                                <a href="/artists/id/<?= $artist->id ?>">FIND OUT MORE</a>
                             </div>
                         </div>
-                    </div>
-                    <div style="background-image: url('/resources/img/news1.png');" class="post">
-                        <div class="cover">
-                            <div class="bottom">
-                                <h3>NEW SONG</h3>
-                                <div class="bottom-inner">
-                                    <div class="date">
-                                        26/04/2022
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="background-image: url('/resources/img/news2.png');" class="post">
-                        <div class="cover">
-                            <div class="bottom">
-                                <h3>NEW SONG</h3>
-                                <div class="bottom-inner">
-                                    <div class="date">
-                                        26/04/2022
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                     
                 </div>
-
-                <div class="music">
-                    <div class="bar-music"></div>
-                    <ul>
-                        <?php foreach($music as $song): ?>
-                            <li class="music-listing">
-                                <div class="title"><?=$song->title?></div><div class="time">05:22</div>
-                                <input class="song" type="hidden" value="/resources/music/<?=$song->file?>">
-                            </li>
-                            <?php endforeach; ?>
-                            <audio id="audio" src=""></audio>
-                    </ul>
-                    <div class="player">
-                        <div class="progress-bar">
-                            <div id="progress" class="bar"></div>
-                        </div>
-                        <div class="play">
-                            <img id="play" src="/resources/img/play.png" alt="">
-                        </div>
-                    </div>
+                <div class="button">
+                    <a href="/artists">FIND MORE ARTISTS</a>
                 </div>
             </div>
-            <div class="back-text">
-                <div class="scroll-text">
-                    <h1 id="song-playing"></h1>
-                </div>
+        </section>
+        <section class="popular-songs">
+            <h1>
+                <ul>
+                    <li><a href="#">Popular this week</a></li>
+                    <li><a href="#">Following</a></li>
+                    <li><a href="#">Biggest Hits</a></li>
+                </ul>
+            </h1>
+            <div class="songs">
+                <?php foreach($music as $song):?>
+                    <div class="song">
+                        <div class="image">
+                            <img src="/resources/img/<?= $song->background ?>" alt="Image">
+                        </div>
+                        <div class="inner-artist">
+                            <h3><?= $song->title ?></h3>
+                            <div class="followers">
+                                <?= $song->likes ?> Likes
+                            </div>
+                            <a href="#">FIND OUT MORE</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                
             </div>
         </section>
     </div>
-</div>
-
-<script src="/resources/js/main.js"></script>

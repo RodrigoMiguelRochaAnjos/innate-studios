@@ -8,7 +8,7 @@ class LoginController extends Controller{
         if(isset($_SESSION['id'])){
             header("Location: /dashboard");
         }
-        echo $this->render("login", [], "login");
+        echo $this->render("login", []);
     }
 
     public function authenticate(){
@@ -31,7 +31,7 @@ class LoginController extends Controller{
             header("Location: /dashboard");
         }
 
-        echo $this->render("login", ['error' => 'invalid login credentials'], "login");
+        echo $this->render("login", ['error' => 'invalid login credentials']);
 
     }
 }

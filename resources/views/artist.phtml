@@ -1,39 +1,14 @@
-<div class="content artist-dark" id="content">
-    <div class="artist-single">
-        <div class="artist-left">
-            <div class="pfp">
-                <img src="/resources/img/<?= $artist->pfp ?>" alt="">
-            </div>
-            
-        </div>
-        <div class="artist-right">
-            <div class="name">
-                <h3>
-                    <div class="user">
-                        <?= $artist->name  ?> (<?= $artist->age?>)
-                        <p class="followers"><?= $artist->followers; ?> Followers</p>
-                    </div>
-                    <a href="artist/follow/<?= $artist->pfp ?>">Follow</a>
-                </h3>
-            </div>
-            <p class="bio"><?= $artist->bio ?></p>
-            <p>bands: <?php foreach($bands as $band) echo $band->name.' '; ?></p>
-            <div class="follow">
-                
-            </div>
-        </div>
-    </div>
-    <?php foreach($bands as $band): ?>
-        <h1><?= $band->name ?></h1>
-        <ul>
-            <?php foreach($band->getAlbums() as $album): ?>
-               <li><?= $album->title; ?></li>
-               <ul>
-                   <?php foreach($album->getMusic() as $music): ?>
-                       <li><?= $music->title; ?></li>
-                   <?php endforeach; ?>
-               </ul>
+<div class="artist-single">
+    <?=$artist->id?>
+    <?=$artist->name?>
+    <?=$artist->followers?>
+    <?php  foreach($bands as $band): ?>
+        <?=$band->name?>
+        <?php foreach($band->getAlbums() as $album): ?>
+            <?= $album->title ?>
+            <?php foreach($album->getMusic() as $music): ?>
+                <?= $music->title ?>
             <?php endforeach; ?>
-        </ul>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    <?php  endforeach; ?>
 </div>

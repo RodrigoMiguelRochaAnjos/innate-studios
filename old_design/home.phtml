@@ -1,0 +1,84 @@
+<div class="content" style="background-image: url('/resources/img/bg.png');">
+    <div class="row">
+        <section class="left">
+            <div class="name">
+                <h1>INNATE <br>STUDIOS</h1>
+                <p>Feel the <b>rythm</b> flow</p>
+            </div>
+        </section>
+        <section class="right">
+            
+            <div class="content-right">
+                <h1>NEWS</h1>
+                <div class="news">
+                    <div style="background-image: url('/resources/img/news.png');" class="post">
+                        <div class="cover">
+                            <div class="bottom">
+                                <h3>NEW SONG</h3>
+                                <div class="bottom-inner">
+                                    <p>by <span>Pearl Tongue</span></p>
+                                    <div class="date">
+                                        26/04/2022
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-image: url('/resources/img/news1.png');" class="post">
+                        <div class="cover">
+                            <div class="bottom">
+                                <h3>NEW SONG</h3>
+                                <div class="bottom-inner">
+                                    <div class="date">
+                                        26/04/2022
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-image: url('/resources/img/news2.png');" class="post">
+                        <div class="cover">
+                            <div class="bottom">
+                                <h3>NEW SONG</h3>
+                                <div class="bottom-inner">
+                                    <div class="date">
+                                        26/04/2022
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="music">
+                    <div class="bar-music"></div>
+                    <ul>
+                        <?php foreach($music as $song): ?>
+                            <li class="music-listing">
+                                <div class="title"><?=$song->title?></div><div class="time">05:22</div>
+                                <input class="song" type="hidden" value="/resources/music/<?=$song->file?>">
+                            </li>
+                            <?php endforeach; ?>
+                            <audio id="audio" src=""></audio>
+                    </ul>
+                    <div class="player">
+                        <div class="progress-bar">
+                            <div id="progress" class="bar"></div>
+                        </div>
+                        <div class="play">
+                            <img id="play" src="/resources/img/play.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="back-text">
+                <div class="scroll-text">
+                    <h1 id="song-playing"></h1>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="/resources/js/main.js"></script>

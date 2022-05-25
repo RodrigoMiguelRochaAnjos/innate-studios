@@ -46,27 +46,7 @@ abstract class Member {
     //     return $instance;
     // }
 
-    // public static function id(int $id){
-    //     $instance = new static();
-
-    //     $fields = ["id", "name", "bio", "pfp", "email", "password", "token", "date_joined", "date_updated"];
-
-    //     $results = \Database\Query::read($fields, "members", "id = ?", [$id]);
-
-    //     foreach($results as $result){
-    //         $instance->id = $result['id'];
-    //         $instance->name = $result['name'];
-    //         $instance->bio = $result['bio'];
-    //         $instance->pfp = $result['pfp'];
-    //         $instance->email = $result['email'];
-    //         $instance->password = $result['password'];
-    //         $instance->token = $result['token'];
-    //         $instance->date_joined = $result['date_joined'];
-    //         $instance->date_updated = $result['date_updated'];
-    //     }
-
-    //     return $instance;
-    // }
+    
 
     public static function authenticate(string $email, string $password){
         $instance = new static();
