@@ -57,8 +57,9 @@ class Studio {
             $artist->followers = $result[8];
             $artist->date_joined= $result[9];
             $artist->date_updated = $result[10];
-
-            $this->artists[] = $artist;
+            if(!isset($_SESSION['id']) || $_SESSION['id'] != $artist->id){
+                $this->artists[] = $artist;
+            }
         }
     }
 }

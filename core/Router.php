@@ -1,19 +1,21 @@
 <?php
-class Router {
-    public static array $routes = [];
+namespace app\core;
 
-    public static function get(string $path, $name){
+class Router {
+    public array $routes = [];
+
+    public function get(string $path, $name){
 
         if(gettype($name) == "string"){
             $ctrl = ucfirst($name)."Controller";
 
-            self::$routes[$path] = [
+            $this->routes[$path] = [
                 'controller' => $ctrl,
                 'name' => $name,
                 'type' => "controller"
             ];
         }else if(gettype($name) == "object"){
-            self::$routes[$path] = [
+            $this->routes[$path] = [
                 'controller' => $name,
                 'name' => "callable",
                 'type' => "callable"
@@ -21,13 +23,13 @@ class Router {
         }
 
     }
-    
-    public static function run(){
+
+    public function resolve(){
         $uri = $_SERVER['REQUEST_URI'];
 
         $found = false;
     
-        foreach(self::$routes as $path => $page){
+        foreach($this->routes as $path => $page){
             $arguments = explode("/", $uri);
 
             array_splice($arguments, 0, 1);
@@ -70,4 +72,6 @@ class Router {
             echo "Page not found";
         }
     }
+    
+    
 }

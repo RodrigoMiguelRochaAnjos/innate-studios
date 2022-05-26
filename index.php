@@ -1,40 +1,51 @@
 <?php
 session_start();
-require_once 'logic/database/Connection.php';
-require_once 'logic/database/Query.php';
-require_once 'logic/Controller.php';
-require_once 'logic/Controllers/HomeController.php';
-require_once 'logic/Controllers/ArtistsController.php';
-require_once 'logic/Controllers/DashboardController.php';
-require_once 'logic/Controllers/DashboardMusicController.php';
-require_once 'logic/Controllers/AboutController.php';
-require_once 'logic/Controllers/ContactController.php';
-require_once 'logic/Controllers/LoginController.php';
-require_once 'logic/Models/Member.php';
-require_once 'logic/Models/Artist.php';
-require_once 'logic/Models/Music.php';
-require_once 'logic/Models/Studio.php';
-require_once 'logic/Models/Band.php';
-require_once 'logic/Models/Album.php';
-require_once 'logic/Router.php';
 
-Router::get('/', 'home');
+require_once 'core/Application.php';
+require_once 'core/Controller.php';
+require_once 'core/Router.php';
+require_once 'database/Connection.php';
+require_once 'database/Query.php';
+require_once 'Controllers/HomeController.php';
+require_once 'Controllers/MusicController.php';
+require_once 'Controllers/ArtistsController.php';
+require_once 'Controllers/DashboardController.php';
+require_once 'Controllers/DashboardMusicController.php';
+require_once 'Controllers/BandsController.php';
+require_once 'Controllers/AboutController.php';
+require_once 'Controllers/ContactController.php';
+require_once 'Controllers/LoginController.php';
+require_once 'Models/Member.php';
+require_once 'Models/Artist.php';
+require_once 'Models/Music.php';
+require_once 'Models/Studio.php';
+require_once 'Models/Band.php';
+require_once 'Models/Album.php';
 
-Router::get('/artists', 'artists');
+use app\core\Application;
+use app\core\Router;
 
-Router::get('/about-us', 'about');
+$app = new Application(__DIR__);
 
-Router::get('/contact-us', 'contact');
+$app->router->get('/', 'home');
 
-Router::get('/login', 'login');
+$app->router->get('/artists', 'artists');
 
-Router::get('/dashboard', 'dashboard');
+$app->router->get('/about-us', 'about');
 
-Router::get('/dashboard-music', 'dashboardMusic');
+$app->router->get('/contact-us', 'contact');
 
-Router::get('/music', 'music');
+$app->router->get('/login', 'login');
 
-Router::get('/logout', function () {
+$app->router->get('/dashboard', 'dashboard');
+
+$app->router->get('/dashboard-music', 'dashboardMusic');
+
+$app->router->get('/music', 'music');
+
+$app->router->get('/bands', 'bands');
+
+$app->router->get('/logout', function () {
     session_unset();
     session_destroy();
 
@@ -42,5 +53,5 @@ Router::get('/logout', function () {
 });
 
 
-Router::run();
+$app->run();
 

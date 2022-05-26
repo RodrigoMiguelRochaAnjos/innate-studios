@@ -45,7 +45,7 @@ nav ul li:hover a {
 }
 
 .artist-single {
-  min-height: 150vh;
+  min-height: 100vh;
   background: radial-gradient(#212121, #0A0A0A);
   padding-top: 10vh;
   color: #FFFFFF;
@@ -58,7 +58,7 @@ nav ul li:hover a {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   background: radial-gradient(#212121, #0A0A0A);
-  min-height: 150vh;
+  min-height: 100vh;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -77,8 +77,6 @@ nav ul li:hover a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-transform: translateY(-20vh);
-          transform: translateY(-20vh);
 }
 
 .single-artists .artists .artist {

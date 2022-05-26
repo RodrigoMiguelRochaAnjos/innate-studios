@@ -70,6 +70,25 @@ class Band
         return $all_albums;
     }
 
+    public function getAllBands(){
+        $params= ["id","name","image","num_songs","followers","date_created","date_updated"];
+
+        $results = \Database\Query::read($params, "band");
+
+        $all_bands=[];
+        foreach ($results as $result) {
+            $band = Band::params($result['name'],$result['image'],$result['num_songs'],$result['followers']);
+            $band->id = $result['id'];
+            $band->date_created = $result['date_created'];
+            $band->date_updated = $result['date_updated'];
+
+            $all_bands[] = $band;
+        }
+
+        return $all_bands;
+    }
+
+
     public function save() {
         $params = [
             'name' => $this->name,

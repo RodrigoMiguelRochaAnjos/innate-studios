@@ -4,6 +4,7 @@ namespace Members;
 use \Database\Query;
 
 abstract class Member {
+    public array $following = [];
     public int $id=0;
     public string $name;
     public string $bio = "";
@@ -55,6 +56,7 @@ abstract class Member {
 
         $results = \Database\Query::read($fields, "members", "email = ?", [$email]);
 
+
         foreach($results as $result){
             if(password_verify($password, $result['password'])){
                 $instance->id = $result['id'];
@@ -66,6 +68,11 @@ abstract class Member {
                 $instance->token = $result['token'];
                 $instance->date_joined = $result['date_joined'];
                 $instance->date_updated = $result['date_updated'];
+
+                foreach (\Database\Query::read(["id_target"], "artist_followers", "id_member = ?", [$instance->id]) as $res) {
+                    $instance->following[] =  $res['id_target'];
+                }
+                
                 break;
             }
         }

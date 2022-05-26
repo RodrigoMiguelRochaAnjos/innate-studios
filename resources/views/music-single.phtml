@@ -1,0 +1,10 @@
+<div class="artist-single">
+    <?=$music->id?>
+    <?=$music->title?>
+    <?=$music->likes?>
+    <?php if(isset($_SESSION['id']) && is_numeric($_SESSION['id'])):  ?>
+    <a href="/music/like/<?=$music->id?>">
+        like<?= in_array($music->id, $me->songs_liked) ? "d" : ""; ?>
+    </a>
+    <?php endif; ?>
+</div>

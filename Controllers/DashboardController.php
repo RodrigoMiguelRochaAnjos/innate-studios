@@ -1,6 +1,8 @@
 <?php
 namespace Controllers;
 
+use app\core\Controller;
+
 use \Members\Artist;
 use \Models\Studio;
 

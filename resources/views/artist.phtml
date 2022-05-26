@@ -2,6 +2,11 @@
     <?=$artist->id?>
     <?=$artist->name?>
     <?=$artist->followers?>
+    <?php if(isset($_SESSION['id']) && is_numeric($_SESSION['id'])):  ?>
+    <a href="/artists/follow/<?=$artist->id?>">
+        follow<?= in_array($artist->id, $me->following) ? "ing" : ""; ?>
+    </a>
+    <?php endif; ?>
     <?php  foreach($bands as $band): ?>
         <?=$band->name?>
         <?php foreach($band->getAlbums() as $album): ?>

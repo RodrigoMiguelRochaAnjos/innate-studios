@@ -1,14 +1,16 @@
 <?php
 namespace Controllers;
 
+use app\core\Controller;
+
 use \Members\Artist;
 use \Models\Studio;
 
 
-class AboutController extends Controller{
+class ContactController extends Controller{
     public function view(){
 
-        echo $this->render("about");
+        echo $this->render("contact");
     }
 
 }

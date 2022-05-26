@@ -42,7 +42,7 @@ class Music
 
         foreach ($results as $result) {
             $instance->id = $result["id"];
-            $instance->title = $result["id"];
+            $instance->title = $result["title"];
             $instance->file = $result["file"];
             $instance->id_album = $result['id_album'];
             $instance->background = $result['background'];
@@ -107,6 +107,13 @@ class Music
         return $all_music;
     }
 
+    public function like($id){
+        $params = [
+            "id_music" => $this->id,
+            "id_member" => $id
+        ];
+        \Database\Query::create($params, "likes");
+    }
 
     public function changeAuthor(int $id) : void{
         $this->authorId = $id;

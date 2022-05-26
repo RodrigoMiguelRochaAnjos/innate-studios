@@ -47,7 +47,7 @@ body{
 }
 
 .artist-single{
-    min-height: 150vh;
+    min-height: 100vh;
     background: radial-gradient($black, $black1);
     padding-top: 10vh;
     color: $white;
@@ -56,14 +56,13 @@ body{
     display: flex;
     flex-wrap: wrap;
     background: radial-gradient($black , $black1);
-    min-height: 150vh;
+    min-height: 100vh;
     align-items: center;
     justify-content: center;
     .artists{
         display: flex;
         justify-content: center;
         align-items: center;
-        transform: translateY(-20vh);
         .artist{
             margin: 45px;
             border: 5px solid $white;

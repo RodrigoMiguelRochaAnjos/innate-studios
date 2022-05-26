@@ -6,6 +6,7 @@ use \Studio\Band;
 
 class Artist extends Member{
     public array $bands=[];
+    public array $songs_liked=[];
     public int $followers;
     public string $age;
 
@@ -66,9 +67,37 @@ class Artist extends Member{
             $instance->followers = $result[8];
             $instance->date_joined = $result[9];
             $instance->date_updated = $result[10];
+
+
+            foreach (\Database\Query::read(["id_target"], "artist_followers", "id_member = ?", [$instance->id]) as $res) {
+                
+                $instance->following[] =  $res['id_target'];
+            }
+
+            foreach (\Database\Query::read(["id_music"], "likes", "id_member = ?", [$instance->id]) as $res) {
+                
+                $instance->songs_liked[] =  $res['id_music'];
+            }
+
         }
 
         return $instance;
+    }
+
+    public function follow($id){
+        $params = [
+            "id_member" => $id,
+            "id_target" => $this->id
+        ];
+        \Database\Query::create($params, "artist_followers");
+    }
+
+    public function unfollow($id){
+        #delte function Queries
+    }
+
+    public function dislike($id){
+        #delte function Queries
     }
 
     public function getBands(){

@@ -15,20 +15,18 @@
         <ul>
             <li><a href="/">HOME</a></li>
             <li><a href="/artists">ARTISTS</a></li>
-            <li><a href="#">MUSIC</a></li>
-            <li><a href="#">BANDS</a></li>
+            <li><a href="/music">MUSIC</a></li>
+            <li><a href="/bands">BANDS</a></li>
             <li><a href="/contact-us">CONTACT US</a></li>
+            <?php if(isset($_SESSION['id'])): ?>
+                <li><a href="/dashboard">DASHBOARD</a></li>
+            <?php else: ?>
+                <li><a href="/login">LOGIN</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
     {{content}}
-    <div class="player">
-        <div class="progress-bar">
-            <div id="progress" class="bar"></div>
-        </div>
-        <div class="play">
-            <img id="play" src="/resources/img/play.png" alt="">
-        </div>
-    </div>
+    
     <footer>
         <div class="row">
             <div class="col-4">
