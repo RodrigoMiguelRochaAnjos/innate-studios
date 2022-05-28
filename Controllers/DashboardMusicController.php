@@ -17,16 +17,17 @@ class DashboardMusicController extends Controller{
         }
         $id= $_SESSION['id'];
 
-        $this->artist = Artist::id($id);
+        $artist = Artist::id($id);
+        $music = new Music();
 
-        $this->artist->getMusic();
+        $songs= $music->search("title", "", $artist->id);
 
         $params = [
             'selected' => "title",
-            'music' => $this->artist->music,
-            'artist' => $this->artist
+            'music' => $songs,
+            'artist' => $artist
         ];
-        echo $this->render("dashboard.music", $params, "dashboard");
+        echo $this->render("dashboard/music", $params, "dashboard");
     }
 
     public function search(){
@@ -53,7 +54,7 @@ class DashboardMusicController extends Controller{
             'music' => $songs,
             'artist' => $this->artist
         ];
-        echo $this->render("dashboard.music", $params, "dashboard");
+        echo $this->render("dashboard/music", $params, "dashboard");
     }
 
 }

@@ -26,7 +26,7 @@ class DashboardController extends Controller{
             'artist' => $artist
         ];
 
-        echo $this->render("dashboard", $params , "dashboard");
+        echo $this->render("dashboard/home", $params , "dashboard");
     }
 
 }

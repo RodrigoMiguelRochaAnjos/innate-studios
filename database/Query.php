@@ -113,8 +113,24 @@ class Query {
         }
     }
 
-    public static function delete(){
+    public static function delete($table, $condition, $values){
+        $con = new Connection();
+        $con = $con->getConnection();
+        
+        $types = "";
 
+        foreach($values as $param){
+            $type = gettype($param)[0];
+
+            $types .= $type;
+        }
+
+        $q = $con->prepare("DELTE FROM $table WHERE $condition");
+        $q->bind_param($types, ...$values);
+
+        if(!$q->execute()){
+            exit("error 500");
+        }
     }
 
     public static function custom($query, $params=[]){

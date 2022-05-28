@@ -4,7 +4,7 @@
         <form action="/dashboard-music/search" method="POST">
             <select name="filter" id="">
                 <option value="title" <?= $selected == "title" ? "selected" : "" ?>>title</option>
-                <option value="date_published" <?= $selected == "date_published" ? "selected" : "" ?>>Date Published</option>
+                <option value="date_released" <?= $selected == "date_released" ? "selected" : "" ?>>Date Published</option>
             </select>
             <input type="search" name="search" id="" placeholder="Insert search argument">
             <button type="submit"><i class="fa fa-search"></i></button>
@@ -12,24 +12,24 @@
     </div>
 </div>
 <ul class="song-list songs">
-    <?php $c =0 ?>
+    <?php $c=0 ?>
     <?php foreach($music as $song): ?>
-        <?php $c++; ?>
-        <li>
-            <div class="id">
-                <?= $c . ". "?>
-            </div>
-            <div class="title">
-                <?= $song->title ?>
-            </div>
-            <div class="date">
-                <?= $song->dateAdded ?>
-            </div>
+        <?php $c++?>
+        <li class="individual-song">
+                    <div class="id">
+                        <?= $c . ". "?>
+                    </div>
+                    <div class="title">
+                        <?= $song->title ?>
+                    </div>
+                    <div class="date">
+                        <?= $song->date_released ?>
+                    </div>
 
-            <div class="options">
-                <a href="#">Edit</a>
-                <a href="#">Delete</a>
-            </div>
+                    <div class="options">
+                        <a href="#">Edit</a>
+                        <a href="#">Delete</a>
+                    </div>
         </li>
     <?php endforeach; ?>
 </ul>

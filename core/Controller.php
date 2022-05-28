@@ -28,7 +28,7 @@ class Controller{
         foreach ($params as $key => $value) {
             $$key = $value;
         }
-        include_once Application::$ROOT_DIR."/resources/views/$view.phtml";
+        include_once Application::$ROOT_DIR."/resources/views/$view.html";
         return ob_get_clean();
     }
 }
