@@ -2,75 +2,45 @@
 namespace app\core;
 
 class Router {
+    public Request $request;
+    public Response $response;
     public array $routes = [];
 
+    public function __construct(Request $request, Response $response){
+        $this->request = $request;
+        $this->response = $response;
+    }
+
     public function get(string $path, $name){
+        $this->routes['get'][$path] = $name;
 
-        if(gettype($name) == "string"){
-            $ctrl = ucfirst($name)."Controller";
-
-            $this->routes[$path] = [
-                'controller' => $ctrl,
-                'name' => $name,
-                'type' => "controller"
-            ];
-        }else if(gettype($name) == "object"){
-            $this->routes[$path] = [
-                'controller' => $name,
-                'name' => "callable",
-                'type' => "callable"
-            ];
-        }
-
+    }
+    public function post(string $path, $name){
+        $this->routes['post'][$path] = $name;
     }
 
     public function resolve(){
-        $uri = $_SERVER['REQUEST_URI'];
+        $path = $this->request->getPath();
+        $method = $this->request->getMethod();
 
-        $found = false;
-    
-        foreach($this->routes as $path => $page){
-            $arguments = explode("/", $uri);
+        $func = $this->request->getFunction();
+        $params = $this->request->getParams();
 
-            array_splice($arguments, 0, 1);
+        $callback = $this->routes[$method][$path] ?? false;
 
-            $argument = '';
+        if($callback === false){
+            $this->response->setStatusCode(404);
+            exit;
+        }
 
-            if(isset($arguments[0])){
-                $argument = $arguments[0];
-            }
-
-            if($path !== '/'.$argument) continue;
-
-            array_splice($arguments, 0, 1);
-
-            $found = true;
-
-            if($page['type'] == "controller"){
-                $controller = "\\Controllers\\". $page['controller'];
-    
-                
-                $controller = new $controller();
-                
-                if(isset($arguments[0])){
-                    $method = $arguments[0];
-                    if(method_exists($controller, $method)){
-                        array_splice($arguments, 0, 1);
+        if(is_string($callback)){
+            $controller_name = '\\Controllers\\'.ucfirst($callback).'Controller';
+            $controller = new $controller_name();
+            $controller->$func($params);
+        }else{
+            $callback();
+        }
         
-                        $controller->$method($arguments);
-                    }
-                }
-    
-                echo $controller->view();
-            }else{
-                $page['controller']();
-            }
-
-        }
-    
-        if(!$found){
-            echo "Page not found";
-        }
     }
     
     

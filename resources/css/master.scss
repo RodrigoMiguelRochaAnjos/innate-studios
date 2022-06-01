@@ -52,6 +52,80 @@ body{
     padding-top: 10vh;
     color: $white;
 }
+.single-music{
+    min-height: 100vh;
+    background: radial-gradient($black, $black1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .music{
+        width: 100%;
+        .song{
+            display: block;
+            width: 80%;
+            margin:0px auto;
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0 0 1px $white;
+            .image{
+                height: 60px;
+                margin-right: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: $white;
+                h3{
+                    padding-left: 20px;
+                }
+                img{
+                    height: 100%;
+                }
+            }
+            .inner-song{
+                color: $white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .followers{
+                a{
+                    text-decoration: none;
+                    color: $white;
+                    padding-right: 10px;
+                    i{
+                    }
+                    .liked{
+                        text-shadow: 0 0 0;
+                        color: $pink;
+                    }
+                }
+            }
+            .buttons{
+                display: flex;
+                a{
+                    text-decoration: none;
+                    color: $black1;
+                    background-color: $white;
+                    display: block;
+                    padding: 10px;
+                    font-size: .7em;
+                    margin-left: 10px;
+                    &:nth-child(2){
+                        background-color: #c33150;
+                        color: $white;
+                        transition: background ease-in-out .3s;
+                        &:hover{
+                            background-color: $pink;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 .single-artists{
     display: flex;
     flex-wrap: wrap;
@@ -59,11 +133,13 @@ body{
     min-height: 100vh;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     .artists{
         display: flex;
         justify-content: center;
         align-items: center;
         .artist{
+            flex-basis: 100%;
             margin: 45px;
             border: 5px solid $white;
             color: $white;

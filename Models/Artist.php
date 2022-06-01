@@ -38,7 +38,7 @@ class Artist extends Member{
     public static function id(int $id){
         $instance = new static();
 
-        $results = \Database\Query::custom("SELECT 
+        $results = (new \Database\Query)->custom("SELECT 
             m.id, 
             m.name, 
             m.bio, 
@@ -69,12 +69,12 @@ class Artist extends Member{
             $instance->date_updated = $result[10];
 
 
-            foreach (\Database\Query::read(["id_target"], "artist_followers", "id_member = ?", [$instance->id]) as $res) {
+            foreach ((new \Database\Query)->read(["id_target"], "artist_followers", "id_member = ?", [$instance->id]) as $res) {
                 
                 $instance->following[] =  $res['id_target'];
             }
 
-            foreach (\Database\Query::read(["id_music"], "likes", "id_member = ?", [$instance->id]) as $res) {
+            foreach ((new \Database\Query)->read(["id_music"], "likes", "id_member = ?", [$instance->id]) as $res) {
                 
                 $instance->songs_liked[] =  $res['id_music'];
             }
@@ -89,7 +89,7 @@ class Artist extends Member{
             "id_member" => $id,
             "id_target" => $this->id
         ];
-        \Database\Query::create($params, "artist_followers");
+        (new \Database\Query)->create($params, "artist_followers");
     }
 
     public function unfollow($id){
@@ -102,7 +102,7 @@ class Artist extends Member{
 
     public function getBands(){
 
-        $results = \Database\Query::custom("SELECT b.id, b.name, b.image, b.num_songs, b.followers, b.date_created, b.date_updated 
+        $results = (new \Database\Query)->custom("SELECT b.id, b.name, b.image, b.num_songs, b.followers, b.date_created, b.date_updated 
         FROM artist_bands ab INNER JOIN band b on ab.id_bands = b.id
         INNER JOIN artists a on a.id = ab.id_artist WHERE ab.id_artist = ?", [$this->id]);
 
@@ -154,14 +154,14 @@ class Artist extends Member{
             "date_updated" => $this->date_updated
         ];
 
-        \Database\Query::update($params, "members", "id = ?", [$this->id]);
+        (new \Database\Query)->update($params, "members", "id = ?", [$this->id]);
 
         $params = [
             "followers" => $this->followers,
             "age" => $this->age
         ];
 
-        \Database\Query::update($params, "artists", "id_member = ?", [$this->id]);
+        (new \Database\Query)->update($params, "artists", "id_member = ?", [$this->id]);
 
     }
 
@@ -177,9 +177,9 @@ class Artist extends Member{
             "date_updated" => $this->date_updated
         ];
 
-        \Database\Query::create($params, "members");
+        (new \Database\Query)->create($params, "members");
 
-        $results = \Database\Query::custom("SELECT id FROM members ORDER BY id DESC LIMIT 1");
+        $results = (new \Database\Query)->custom("SELECT id FROM members ORDER BY id DESC LIMIT 1");
         $id=$results[0][0];
 
         $params = [
@@ -188,6 +188,6 @@ class Artist extends Member{
             "age" => $this->age
         ];
 
-        \Database\Query::create($params, "artists");
+        (new \Database\Query)->create($params, "artists");
     }
 }

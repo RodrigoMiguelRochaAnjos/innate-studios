@@ -19,7 +19,7 @@ class Studio {
 
         $fields = ["id", "name", "bio", "pfp", "email", "password", "token", "date_joined", "date_updated"];
 
-        $results = \Database\Query::read($params, "members");
+        $results = (new \Database\Query)->read($params, "members");
 
         foreach($results as $result){
             $artist = Member::params($result['name'], $result['bio'], $result['email'], $result['password'] , $result['token'], $result['pfp']);
@@ -34,7 +34,7 @@ class Studio {
     }
     public function getArtists(){
 
-        $results = \Database\Query::custom("SELECT 
+        $results = (new \Database\Query)->custom("SELECT 
             m.id, 
             m.name, 
             m.bio, 

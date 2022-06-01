@@ -4,11 +4,14 @@ namespace Database;
 use \Database\Connection;
 
 class Query {
-    public static function create(array $params, string $table){
-        $con = new Connection();
-        $con = $con->getConnection();
+    private \mysqli $con;
 
+    public function __construct(){
+        $con = Connection::getInstance();
+        $this->con = $con->getConnection();
+    }
 
+    public function create(array $params, string $table){
         $fields = [];
         $values = [];
         $types = "";
@@ -29,7 +32,7 @@ class Query {
 
         $tmp_placement = implode(",", $tmp_placement);
 
-        $q = $con->prepare("insert into $table($fields) values($tmp_placement)");
+        $q = $this->con->prepare("insert into $table($fields) values($tmp_placement)");
         $q->bind_param($types, ...$values);
 
         if(!$q->execute()){
@@ -37,10 +40,7 @@ class Query {
         }
     }
 
-    public static function read($fields, $table, $condition = '', $params = []){
-        $con = new Connection();
-        $con = $con->getConnection();
-
+    public function read($fields, $table, $condition = '', $params = []){
         $fields_text = implode(",", $fields);
 
         $sql= "SELECT $fields_text FROM $table";
@@ -48,7 +48,7 @@ class Query {
         if($condition != ''){
             $sql = "SELECT $fields_text FROM $table WHERE $condition";
         }
-        $q = $con->prepare($sql);
+        $q = $this->con->prepare($sql);
 
         if(!$q->execute($params)){
             exit("error 500");
@@ -73,10 +73,7 @@ class Query {
 
     }
 
-    public static function update($params, $table, $condition = '', $condition_params = []){
-        $con = new Connection();
-        $con = $con->getConnection();
-
+    public function update($params, $table, $condition = '', $condition_params = []){
         $statement = [];
         $values = [];
         $types = "";
@@ -105,7 +102,7 @@ class Query {
             $sql = "UPDATE $table SET $statement WHERE $condition";
         }
 
-        $q = $con->prepare($sql);
+        $q = $this->con->prepare($sql);
         $q->bind_param($types, ...$values);
 
         if(!$q->execute()){
@@ -113,10 +110,7 @@ class Query {
         }
     }
 
-    public static function delete($table, $condition, $values){
-        $con = new Connection();
-        $con = $con->getConnection();
-        
+    public function delete($table, $condition, $values){
         $types = "";
 
         foreach($values as $param){
@@ -125,7 +119,7 @@ class Query {
             $types .= $type;
         }
 
-        $q = $con->prepare("DELTE FROM $table WHERE $condition");
+        $q = $this->con->prepare("DELTE FROM $table WHERE $condition");
         $q->bind_param($types, ...$values);
 
         if(!$q->execute()){
@@ -133,10 +127,7 @@ class Query {
         }
     }
 
-    public static function custom($query, $params=[]){
-        $con = new Connection();
-        $con = $con->getConnection();
-
+    public function custom($query, $params=[]){
         $types = "";
 
         foreach($params as $value){
@@ -145,7 +136,7 @@ class Query {
             $types .= $type;
         }
 
-        $q = $con->prepare($query);
+        $q = $this->con->prepare($query);
         if(!empty($params)){
             $q->bind_param($types, ...$params);
         }

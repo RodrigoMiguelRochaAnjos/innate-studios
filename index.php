@@ -3,6 +3,8 @@ session_start();
 
 require_once 'core/Application.php';
 require_once 'core/Controller.php';
+require_once 'core/Request.php';
+require_once 'core/Response.php';
 require_once 'core/Router.php';
 require_once 'database/Connection.php';
 require_once 'database/Query.php';
@@ -37,9 +39,13 @@ $app->router->get('/contact-us', 'contact');
 
 $app->router->get('/login', 'login');
 
+$app->router->post('/login', 'login');
+
 $app->router->get('/dashboard', 'dashboard');
 
 $app->router->get('/dashboard-music', 'dashboardMusic');
+
+$app->router->post('/dashboard-music', 'dashboardMusic');
 
 $app->router->get('/music', 'music');
 

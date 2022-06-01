@@ -54,7 +54,7 @@ abstract class Member {
 
         $fields = ["id", "name", "bio", "pfp", "email", "password", "token", "date_joined", "date_updated"];
 
-        $results = \Database\Query::read($fields, "members", "email = ?", [$email]);
+        $results = (new \Database\Query)->read($fields, "members", "email = ?", [$email]);
 
 
         foreach($results as $result){
@@ -69,7 +69,7 @@ abstract class Member {
                 $instance->date_joined = $result['date_joined'];
                 $instance->date_updated = $result['date_updated'];
 
-                foreach (\Database\Query::read(["id_target"], "artist_followers", "id_member = ?", [$instance->id]) as $res) {
+                foreach ((new \Database\Query)->read(["id_target"], "artist_followers", "id_member = ?", [$instance->id]) as $res) {
                     $instance->following[] =  $res['id_target'];
                 }
                 

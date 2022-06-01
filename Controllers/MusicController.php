@@ -9,9 +9,13 @@ use \Studio\Productions\Music;
 class MusicController extends Controller{
     public function view(){
         $music = new Music();
-
+        $me = "";
+        if(isset($_SESSION['id'])){
+            $me = Artist::id($_SESSION['id']);
+        }
         $params = [
             'music' => $music->getAllMusic(),
+            'me' => $me
         ];
         echo $this->render("music", $params);
     }
@@ -59,9 +63,9 @@ class MusicController extends Controller{
         if(!in_array($music->id, $me->songs_liked)){
             $music->like($_SESSION['id']);
         }else{
-            $me->dislike($id);
+            $me->dislike($music->id);
         }
         
-        header("Location: /music/id/$id");
+        header("Location: /music");
     }
 }

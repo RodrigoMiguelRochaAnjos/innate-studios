@@ -1,16 +1,27 @@
-<section class="single-artists">  
-    <div class="artists">
+<section class="single-music"> 
+    <div class="filters">
+        <a href="123"></a>
+    </div>
+    <div class="music">
         <?php foreach($music as $song):?>
-            <div class="artist">
+            <div class="song">
                 <div class="image">
                     <img src="/resources/img/<?= $song->background ?>" alt="Image">
-                </div>
-                <div class="inner-artist">
                     <h3><?= $song->title ?></h3>
+                </div>
+                <div class="inner-song">
                     <div class="followers">
-                        <?= $song->likes ?> Likes
+                        <?php if(isset($_SESSION['id']) && is_numeric($_SESSION['id'])):  ?>
+                        <a href="/music/like/<?=$song->id?>">
+                            <?= $song->likes ?>
+                            <i class="fa fa-heart <?= in_array($song->id, $me->songs_liked) ? "liked" : ""; ?>"></i>
+                        </a>
+                        <?php endif; ?>
                     </div>
-                    <a href="/music/id/<?=$song->id ?>">FIND OUT MORE</a>
+                    <div class="buttons">
+                        <a href=""><i class="fa fa-download"></i> Download</a>
+                        <a href=""><i class="fa fa-shopping-cart"></i> Purchase</a>
+                    </div>
                 </div>
             </div>
         <?php endforeach; ?>

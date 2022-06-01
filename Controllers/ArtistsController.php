@@ -23,7 +23,7 @@ class ArtistsController extends Controller{
         }
 
         $id = $params[0];
-        
+
         $artist = Artist::id($id);
 
         $artist->getBands();
@@ -32,7 +32,6 @@ class ArtistsController extends Controller{
         if(isset($_SESSION['id']) && is_numeric($_SESSION['id'])){
             $me = Artist::id($_SESSION['id']);
         }
-
         $params = [
             'artist' => $artist,
             'me' => $me,

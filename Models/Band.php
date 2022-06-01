@@ -35,7 +35,7 @@ class Band
 
         $params= ["id", "name", "image", "num_songs", "followers", "date_created", "date_updated"];
 
-        $results = \Database\Query::read($params, "band", "id = ?", [$id]);
+        $results = (new \Database\Query)->read($params, "band", "id = ?", [$id]);
 
         foreach ($results as $result) {
             $instance->id = $result['id'];
@@ -54,7 +54,7 @@ class Band
     public function getAlbums(){
         $params= ["id", "title", "image", "band_id", "num_songs", "date_released", "date_updated"];
 
-        $results = \Database\Query::read($params, "albums", "band_id = ?", [$this->id]);
+        $results = (new \Database\Query)->read($params, "albums", "band_id = ?", [$this->id]);
 
         $all_albums=[];
 
@@ -73,7 +73,7 @@ class Band
     public function getAllBands(){
         $params= ["id","name","image","num_songs","followers","date_created","date_updated"];
 
-        $results = \Database\Query::read($params, "band");
+        $results = (new \Database\Query)->read($params, "band");
 
         $all_bands=[];
         foreach ($results as $result) {
@@ -99,7 +99,7 @@ class Band
             'date_updated' => $this->date_updated
         ];
         
-        \Database\Query::update($params, "music", "id = ?", [$this->id]);
+        (new \Database\Query)->update($params, "music", "id = ?", [$this->id]);
     }
 
     public function add() {
@@ -112,7 +112,7 @@ class Band
             'date_updated' => $this->date_updated
         ];
         
-        \Database\Query::create($params, "music");
+        (new \Database\Query)->create($params, "music");
     }
 }
 

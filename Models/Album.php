@@ -36,7 +36,7 @@ class Album
 
         $params= ["id", "title", "image", "band_id", "num_songs", "date_released", "date_updated"];
 
-        $results = \Database\Query::read($params, "albums", "id = ?", [$id]);
+        $results = (new \Database\Query)->read($params, "albums", "id = ?", [$id]);
 
         foreach ($results as $result) {
             $instance->id = $result['id'];
@@ -55,7 +55,7 @@ class Album
     public function getMusic(){
         $params= ["id", "title", "file", "background", "id_album", "views", "likes", "date_released", "date_updated"];
 
-        $results = \Database\Query::read($params, "music", "id_album = ?", [$this->id]);
+        $results = (new \Database\Query)->read($params, "music", "id_album = ?", [$this->id]);
 
         $all_music=[];
 
@@ -83,7 +83,7 @@ class Album
             'date_updated' => $this->date_updated
         ];
         
-        \Database\Query::update($params, "albums", "id = ?", [$this->id]);
+        (new \Database\Query)->update($params, "albums", "id = ?", [$this->id]);
     }
 
     public function add() {
@@ -96,7 +96,7 @@ class Album
             'date_updated' => $this->date_updated
         ];
         
-        \Database\Query::create($params, "albums");
+        (new \Database\Query)->create($params, "albums");
     }
 }
 

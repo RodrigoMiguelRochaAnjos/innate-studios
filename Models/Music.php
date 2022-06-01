@@ -38,7 +38,7 @@ class Music
 
         $params= ["id", "title", "file", "background", "id_album", "views", "likes", "date_released", "date_updated"];
 
-        $results = \Database\Query::read($params, "music", "id = ?", [$id]);
+        $results = (new \Database\Query)->read($params, "music", "id = ?", [$id]);
 
         foreach ($results as $result) {
             $instance->id = $result["id"];
@@ -75,7 +75,7 @@ class Music
        	WHERE
         	ar.id_member = ?";
 
-        $results = \Database\Query::custom($sql, [$user_id]);
+        $results = (new \Database\Query)->custom($sql, [$user_id]);
 
         if($query != ""){
             $sql= "SELECT m.id, m.title, m.file, m.background, m.id_album, m.views, 
@@ -89,7 +89,7 @@ class Music
                 m.$field LIKE ? AND
                 ar.id_member = ?";
                 
-            $results = \Database\Query::custom($sql, ["%$query%", $user_id]);
+            $results = (new \Database\Query)->custom($sql, ["%$query%", $user_id]);
         }
         
 
@@ -124,7 +124,7 @@ class Music
     public function getAllMusic(){
         $params= ["id", "title", "file", "background", "id_album", "views", "likes", "date_released", "date_updated"];
 
-        $results = \Database\Query::read($params, "music");
+        $results = (new \Database\Query)->read($params, "music");
 
         $all_music=[];
 
@@ -147,7 +147,7 @@ class Music
             "id_music" => $this->id,
             "id_member" => $id
         ];
-        \Database\Query::create($params, "likes");
+        (new \Database\Query)->create($params, "likes");
     }
 
     public function changeAuthor(int $id) : void{
@@ -176,7 +176,7 @@ class Music
             'date_updated' => $this->date_updated
         ];
         
-        \Database\Query::update($params, "music", "id = ?", [$this->id]);
+        (new \Database\Query)->update($params, "music", "id = ?", [$this->id]);
     }
 
     public function add() {
@@ -191,7 +191,7 @@ class Music
             'date_updated' => $this->date_updated
         ];
         
-        \Database\Query::create($params, "music");
+        (new \Database\Query)->create($params, "music");
     }
 }
 
